@@ -1,11 +1,16 @@
 {
 	"name": "stackvis",
 	"version": "0.0.1",
-	"description": "stack visualization tools"
+	"description": "stack visualization tools",
 	"main": "./lib/stackvis.js",
 	
 	"repository": {
 		"type": "git",
 		"url": "git://github.com/davepacheco/stackvis.git"
+	},
+
+	"dependencies": {
+		"carrier": "0.1.7"
+		"bunyan": "0.6.8"
 	}
 }
