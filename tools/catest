@@ -1,0 +1,320 @@
+#!/bin/bash
+
+#
+# catest: a simple testing tool and framework. See usage below for details.
+#
+
+shopt -s xpg_echo
+
+#
+# Global configuration
+#
+cat_arg0=$(basename $0)			# canonical name of "catest"
+cat_outbase="catest.$$"			# output directory name
+cat_tstdir="tst"			# top-level test directory
+cat_node="node"				# relative path to "node"
+
+#
+# Options and arguments
+#
+cat_tests=""				# list of tests (absolute paths)
+opt_a=false				# run all tests
+opt_k=false				# keep output of successful tests
+opt_o="/var/tmp"			# parent directory for output directory
+opt_t=					# TAP format output file
+
+#
+# Current state
+#
+cat_outdir=				# absolute path to output directory
+cat_tapfile=				# absolute path of TAP output file
+cat_ntests=				# total number of tests
+cat_nfailed=0				# number of failed tests run
+cat_npassed=0				# number of successful tests run
+cat_nrun=0				# total number of tests run
+
+#
+# fail MSG: emits the given error message to stderr and exits non-zero.
+#
+function fail
+{
+	echo "$cat_arg0: $@" >&2
+
+	[[ -n $cat_tapfile ]] && echo "Bail out! $@" >> $cat_tapfile
+
+	exit 1
+}
+
+#
+# usage [MSG]: emits the given message, if any, and a usage message, then exits.
+#
+function usage
+{
+	[[ $# -ne 0 ]] && echo "$cat_arg0: $@\n" >&2
+
+	cat <<USAGE >&2
+Usage: $cat_arg0 [-k] [-o dir] [-t file] test1 ...
+       $cat_arg0 [-k] [-o dir] [-t file] -a
+
+In the first form, runs specified tests.  In the second form, runs all tests
+found under "$cat_tstdir" of the form "tst*.<ext>" for supported extensions.
+
+TESTS
+
+    Tests are just files to be executed by some interpreter. In most cases, a
+    test succeeds if it exits successfully and fails otherwise.  You can also
+    specify the expected stdout of the test in a file with the same name as the
+    test plus a ".out" suffix, in which case the test will also fail if the
+    actual output does not match the expected output.
+
+    Supported interpreter extensions are "sh" (bash) and "js" (node).
+
+    This framework does not provide per-test setup/teardown facilities, but
+    test files can do whatever they want, including making use of common
+    libraries for setup and teardown.
+
+TEST OUTPUT
+
+    Summary output is printed to stdout.  TAP output can be emitted with "-t".
+
+    Per-test output is placed in a new temporary directory inside the directory
+    specified by the -o option, or /var/tmp if -o is not specified.
+    
+    Within the output directory will be a directory for each failed test which
+    includes a README describing why the test failed (e.g., exited non-zero), a
+    copy of the test file itself, the actual stdout and stderr of the test, and
+    the expected stdout of the test (if specified).
+    
+    If -k is specified, the output directory will also include a directory for
+    each test that passed including the stdout and stderr from the test.
+
+The following options may be specified:
+
+	-a 		Runs all tests under $cat_tstdir
+			(ignores other arguments)
+	-h		Output this message
+	-k		Keep output from all tests, not just failures
+	-o directory	Specifies the output directory for tests
+			(default: /var/tmp)
+	-t file		Emit summary output in TAP format
+
+USAGE
+
+	exit 2
+}
+
+#
+# abspath FILE: emits a canonical, absolute path to the given file or directory.
+#
+function abspath
+{
+	local dir=$(dirname $1) base=$(basename $1)
+
+	if [[ $base = ".." ]]; then
+		cd "$dir"/.. > /dev/null || fail "abspath '$1': failed to chdir"
+		pwd
+		cd - > /dev/null || fail "abspath '$1': failed to chdir back"
+	else
+		cd "$dir" || fail "abspath '$1': failed to chdir"
+		echo "$(pwd)/$base"
+		cd - > /dev/null || fail "abspath '$1': failed to chdir back"
+	fi
+}
+
+#
+# cleanup_test TESTDIR "success" | "failure": cleans up the output directory
+#     for this test
+#
+function cleanup_test
+{
+	local test_odir="$1" result=$2
+	local newdir
+
+	if [[ $result = "success" ]]; then
+		newdir="$(dirname $test_odir)/success.$cat_npassed"
+	else
+		newdir="$(dirname $test_odir)/failure.$cat_nfailed"
+	fi
+
+	mv "$test_odir" "$newdir"
+	echo $newdir
+}
+
+#
+# emit_failure TEST ODIR REASON: indicate that a test has failed
+#
+function emit_failure
+{
+	local test_label=$1 odir=$2 reason=$3
+
+	if [[ $cat_tapfile ]]; then
+		echo "not ok $(($cat_nrun+1)) $test_label" >> $cat_tapfile
+	fi
+
+	echo "FAILED."
+	echo "$test_path failed: $reason" > "$odir/README"
+
+	[[ -n "$odir" ]] && echo ">>> failure details in $odir\n"
+	((cat_nfailed++))
+}
+
+#
+# emit_pass TEST: indicate that a test has passed
+#
+function emit_pass
+{
+	local test_label=$1
+
+	if [[ $cat_tapfile ]]; then
+		echo "ok $((cat_nrun+1)) $test_label" >> $cat_tapfile
+	fi
+
+	echo "success."
+	((cat_npassed++))
+}
+
+#
+# Executes a single test
+#
+# Per-test actions:
+# - Make a directory for that test
+# - cd into that directory and exec the test
+# - Redirect standard output and standard error to files
+# - Tests return 0 to indicate success, non-zero to indicate failure
+#
+function execute_test
+{
+	[[ $# -eq 1 ]] || fail "Missing test to execute"
+	local test_path=$1
+	local test_name=$(basename $1)
+	local test_dir=$(dirname $1)
+	local test_label=$(echo $test_path | sed -e s#^$SRC/##)
+	local test_odir="$cat_outdir/test.$cat_nrun"
+	local ext=${test_name##*.}
+	local faildir
+	local EXEC
+
+	echo "Executing test $test_label ... \c "
+	mkdir "$test_odir" >/dev/null || fail "failed to create test directory"
+	cp "$test_path" "$test_odir"
+
+	case "$ext" in
+	"sh") 	EXEC=bash ;;
+	"js") 	EXEC=node ;;
+	*) 	faildir=$(cleanup_test "$test_odir" "failure")
+		emit_failure "$test_label" "$faildir" "unknown file extension"
+		return 0
+		;;
+	esac
+
+	pushd "$test_dir" >/dev/null
+	$EXEC $test_name >$test_odir/$$.out 2>$test_odir/$$.err
+	execres=$?
+	popd > /dev/null
+
+	if [[ $execres != 0 ]]; then
+		faildir=$(cleanup_test "$test_odir" "failure")
+		emit_failure "$test_label" "$faildir" "test returned $execres"
+		return 0
+	fi
+
+	if [[ -f $test_path.out ]] && \
+	    ! diff $test_path.out $test_odir/$$.out > /dev/null ; then
+		cp $test_path.out $test_odir/$test_name.out
+		faildir=$(cleanup_test "$test_odir" "failure")
+		emit_failure "$test_label" "$faildir" "stdout mismatch"
+		return 0
+	fi
+
+	cleanup_test "$test_odir" "success" > /dev/null
+	emit_pass "$test_label"
+}
+
+while getopts ":o:t:akh?" c $@; do
+	case "$c" in
+	a|k) 	eval opt_$c=true ;;
+	o|t) 	eval opt_$c="$OPTARG" ;;
+	h)	usage ;;
+	:) 	usage "option requires an argument -- $OPTARG" ;;
+	*) 	usage "invalid option: $OPTARG" ;;
+	esac
+done
+
+shift $((OPTIND-1))
+[[ $# -eq 0 && $opt_a == "false" ]] && \
+    usage "must specify \"-a\" or list of tests"
+
+#
+# Initialize paths and other environment variables.
+#
+export SRC=$(abspath $(dirname $0)/..)
+export PATH=$SRC/deps/ctf2json:$PATH
+[[ -n $HOST ]] || export HOST=$(hostname)
+
+#
+# We create and set CATMPDIR as a place for the tests to store temporary files.
+#
+export CATMPDIR="/var/tmp/catest.$$_tmpfiles"
+
+if [[ $opt_a = "true" ]]; then
+	cat_tests=$(find $SRC/$cat_tstdir \
+	    -name 'tst*.js' -o -name 'tst*.sh') || \
+	    fail "failed to locate tests in $SRC/$cat_tstdir"
+else
+	for t in $@; do
+		[[ -f $t ]] || fail "cannot find test $t"
+		cat_tests="$(abspath $t) $cat_tests"
+	done
+fi
+
+mkdir -p "$opt_o/$cat_outbase"
+cat_outdir=$(abspath $opt_o/$cat_outbase)
+
+mkdir -p $CATMPDIR || fail "failed to create $CATMPDIR"
+
+cat_ntests=$(echo $cat_tests | wc -w)
+printf "Configuration:\n"
+printf "    SRC:                         $SRC\n"
+printf "    Output directory:            $cat_outdir\n"
+printf "    Temp directory:              $CATMPDIR\n"
+if [[ -n "$opt_t" ]]; then
+    cat_tapfile=$(abspath $opt_t)
+    printf "    TAP output:                  $cat_tapfile\n"
+fi
+printf "    Keep successful test output: $opt_k\n"
+printf "    Found %d test(s) to run\n\n" $cat_ntests
+
+#
+# Validate parameters and finish setup.
+#
+[[ $cat_ntests -gt 0 ]] || fail "no tests found"
+
+if [[ -n "$cat_tapfile" ]]; then
+	echo "1..$(($cat_ntests))" > $cat_tapfile || \
+	    fail "failed to emit TAP output"
+fi
+
+#
+# Start the test run.
+#
+printf "===================================================\n\n"
+
+for t in $(echo $cat_tests | sort); do
+	execute_test $t
+	((cat_nrun++))
+done
+
+printf "\n===================================================\n\n"
+printf "Results:\n"
+printf "\tTests passed:\t%2d/%2d\n" $cat_npassed $cat_nrun
+printf "\tTests failed:\t%2d/%2d\n" $cat_nfailed $cat_nrun
+printf "\n===================================================\n"
+
+if [[ $opt_k == "false" ]]; then
+	echo "Cleaning up output from successful tests ... \c "
+	rm -rf $cat_outdir/success.*
+	rm -rf $CATMPDIR
+	echo "done."
+fi
+
+exit $cat_nfailed
