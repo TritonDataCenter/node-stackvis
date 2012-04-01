@@ -24,10 +24,6 @@ The intended workflow is:
   gradient, and time-based.  Another possibility is to use hue to denote the
   module and saturation to denote the size of a frame relative to others at the
   same level of depth.
-- Tweak saturation for the existing time-based coloring: currently, the
-  saturation is determined by looking at (nsamples in frame) / (total samples),
-  but it would be better if it were (nsamples in frame) / (nsamples in row), as
-  this would cause different entries in the same row to stand out better.
 - Experiment with more interactive visualizations, such as:
 
     http://bl.ocks.org/1005873
