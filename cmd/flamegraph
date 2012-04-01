@@ -5,24 +5,16 @@
  */
 
 var mod_bunyan = require('bunyan');
-
-var mod_input_common = require('../lib/input-common');
-var mod_input_collapsed = require('../lib/input-collapsed');
-var mod_output_flamegraph = require('../lib/output-flamegraph-svg');
+var mod_stackvis = require('../lib/stackvis');
 
 var log = new mod_bunyan({
     'name': 'flamegraph',
     'stream': process.stderr
 });
 
-var reader = new mod_input_collapsed.reader(process.stdin, log);
+var reader = new mod_stackvis.readerLookup('collapsed');
+var writer = new mod_stackvis.writerLookup('flamegraph-svg');
 
-mod_input_common.collapseStacks(reader, function (err, stacks) {
-	mod_output_flamegraph.emit({
-	    'stacks': stacks,
-	    'output': process.stdout,
-	    'log': log
-	}, function () {});
-});
-
+mod_stackvis.pipeStacks(log, process.stdin, reader, writer, process.stdout,
+    function () {});
 process.stdin.resume();

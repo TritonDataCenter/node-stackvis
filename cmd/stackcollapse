@@ -4,20 +4,17 @@
  * cmd/stackcollapse: emit collapsed stack traces from DTrace output
  */
 
-var mod_input_common = require('../lib/input-common');
-var mod_input_dtrace = require('../lib/input-dtrace');
 var mod_bunyan = require('bunyan');
+var mod_stackvis = require('../lib/stackvis');
 
 var log = new mod_bunyan({
     'name': 'stackcollapse',
     'stream': process.stderr
 });
 
-var reader = new mod_input_dtrace.reader(process.stdin, log);
-mod_input_common.collapseStacks(reader, function (err, stacks) {
-	stacks.eachStackByCount(function (frames, count) {
-		process.stdout.write(frames.join(',') + ' ' + count + '\n');
-	});
-});
+var reader = mod_stackvis.readerLookup('dtrace');
+var writer = mod_stackvis.writerLookup('collapsed');
 
+mod_stackvis.pipeStacks(log, process.stdin, reader, writer, process.stdout,
+    function () {});
 process.stdin.resume();
