@@ -1,0 +1,15 @@
+/*
+ * icicle.css: styles for Icicle visualization
+ */
+body {
+	font-family: sans-serif;
+	font-size: small;
+}
+
+rect {
+	stroke: #fff;
+}
+
+rect:hover {
+	cursor: pointer;
+}
