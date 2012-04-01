@@ -22,6 +22,7 @@ JS_FILES	:= $(shell find cmd lib test -name '*.js')
 JSL_CONF_NODE	 = tools/jsl.node.conf
 JSL_FILES_NODE   = $(JS_FILES)
 
+JSSTYLE_FLAGS    = -oleading-right-paren-ok=1
 JSSTYLE_FILES	 = $(JS_FILES)
 
 JSTEST_FILES	:= $(shell find test -name 'tst.*.js')

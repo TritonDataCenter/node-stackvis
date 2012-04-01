@@ -1,0 +1,28 @@
+#!/usr/bin/env node
+
+/*
+ * cmd/flamegraph: emit a flame graph SVG from collapsed output
+ */
+
+var mod_bunyan = require('bunyan');
+
+var mod_input_common = require('../lib/input-common');
+var mod_input_collapsed = require('../lib/input-collapsed');
+var mod_output_flamegraph = require('../lib/output-flamegraph-svg');
+
+var log = new mod_bunyan({
+    'name': 'flamegraph',
+    'stream': process.stderr
+});
+
+var reader = new mod_input_collapsed.reader(process.stdin, log);
+
+mod_input_common.collapseStacks(reader, function (err, stacks) {
+	mod_output_flamegraph.emit({
+	    'stacks': stacks,
+	    'output': process.stdout,
+	    'log': log
+	}, function () {});
+});
+
+process.stdin.resume();

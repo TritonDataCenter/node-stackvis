@@ -15,7 +15,7 @@ var log = new mod_bunyan({
 
 var reader = new mod_input_dtrace.reader(process.stdin, log);
 mod_input_common.collapseStacks(reader, function (err, stacks) {
-	stacks.eachStackSorted(function (frames, count) {
+	stacks.eachStackByCount(function (frames, count) {
 		process.stdout.write(frames.join(',') + ' ' + count + '\n');
 	});
 });
