@@ -1,286 +1,2027 @@
 {
-  "flare": {
-    "analytics": {
-      "cluster": {
-        "AgglomerativeCluster": 3938,
-        "CommunityStructure": 3812,
-        "HierarchicalCluster": 6714,
-        "MergeEdge": 743
-      },
-      "graph": {
-        "BetweennessCentrality": 3534,
-        "LinkDistance": 5731,
-        "MaxFlowMinCut": 7840,
-        "ShortestPaths": 5914,
-        "SpanningTree": 3416
-      },
-      "optimization": {
-        "AspectRatioBanker": 7074
-      }
-    },
-    "animate": {
-      "Easing": 17010,
-      "FunctionSequence": 5842,
-      "interpolate": {
-        "ArrayInterpolator": 1983,
-        "ColorInterpolator": 2047,
-        "DateInterpolator": 1375,
-        "Interpolator": 8746,
-        "MatrixInterpolator": 2202,
-        "NumberInterpolator": 1382,
-        "ObjectInterpolator": 1629,
-        "PointInterpolator": 1675,
-        "RectangleInterpolator": 2042
-      },
-      "ISchedulable": 1041,
-      "Parallel": 5176,
-      "Pause": 449,
-      "Scheduler": 5593,
-      "Sequence": 5534,
-      "Transition": 9201,
-      "Transitioner": 19975,
-      "TransitionEvent": 1116,
-      "Tween": 6006
-    },
-    "data": {
-      "converters": {
-        "Converters": 721,
-        "DelimitedTextConverter": 4294,
-        "GraphMLConverter": 9800,
-        "IDataConverter": 1314,
-        "JSONConverter": 2220
-      },
-      "DataField": 1759,
-      "DataSchema": 2165,
-      "DataSet": 586,
-      "DataSource": 3331,
-      "DataTable": 772,
-      "DataUtil": 3322
-    },
-    "display": {
-      "DirtySprite": 8833,
-      "LineSprite": 1732,
-      "RectSprite": 3623,
-      "TextSprite": 10066
-    },
-    "flex": {
-      "FlareVis": 4116
-    },
-    "physics": {
-      "DragForce": 1082,
-      "GravityForce": 1336,
-      "IForce": 319,
-      "NBodyForce": 10498,
-      "Particle": 2822,
-      "Simulation": 9983,
-      "Spring": 2213,
-      "SpringForce": 1681
-    },
-    "query": {
-      "AggregateExpression": 1616,
-      "And": 1027,
-      "Arithmetic": 3891,
-      "Average": 891,
-      "BinaryExpression": 2893,
-      "Comparison": 5103,
-      "CompositeExpression": 3677,
-      "Count": 781,
-      "DateUtil": 4141,
-      "Distinct": 933,
-      "Expression": 5130,
-      "ExpressionIterator": 3617,
-      "Fn": 3240,
-      "If": 2732,
-      "IsA": 2039,
-      "Literal": 1214,
-      "Match": 3748,
-      "Maximum": 843,
-      "methods": {
-        "add": 593,
-        "and": 330,
-        "average": 287,
-        "count": 277,
-        "distinct": 292,
-        "div": 595,
-        "eq": 594,
-        "fn": 460,
-        "gt": 603,
-        "gte": 625,
-        "iff": 748,
-        "isa": 461,
-        "lt": 597,
-        "lte": 619,
-        "max": 283,
-        "min": 283,
-        "mod": 591,
-        "mul": 603,
-        "neq": 599,
-        "not": 386,
-        "or": 323,
-        "orderby": 307,
-        "range": 772,
-        "select": 296,
-        "stddev": 363,
-        "sub": 600,
-        "sum": 280,
-        "update": 307,
-        "variance": 335,
-        "where": 299,
-        "xor": 354,
-        "_": 264
-      },
-      "Minimum": 843,
-      "Not": 1554,
-      "Or": 970,
-      "Query": 13896,
-      "Range": 1594,
-      "StringUtil": 4130,
-      "Sum": 791,
-      "Variable": 1124,
-      "Variance": 1876,
-      "Xor": 1101
-    },
-    "scale": {
-      "IScaleMap": 2105,
-      "LinearScale": 1316,
-      "LogScale": 3151,
-      "OrdinalScale": 3770,
-      "QuantileScale": 2435,
-      "QuantitativeScale": 4839,
-      "RootScale": 1756,
-      "Scale": 4268,
-      "ScaleType": 1821,
-      "TimeScale": 5833
-    },
-    "util": {
-      "Arrays": 8258,
-      "Colors": 10001,
-      "Dates": 8217,
-      "Displays": 12555,
-      "Filter": 2324,
-      "Geometry": 10993,
-      "heap": {
-        "FibonacciHeap": 9354,
-        "HeapNode": 1233
-      },
-      "IEvaluable": 335,
-      "IPredicate": 383,
-      "IValueProxy": 874,
-      "math": {
-        "DenseMatrix": 3165,
-        "IMatrix": 2815,
-        "SparseMatrix": 3366
-      },
-      "Maths": 17705,
-      "Orientation": 1486,
-      "palette": {
-        "ColorPalette": 6367,
-        "Palette": 1229,
-        "ShapePalette": 2059,
-        "SizePalette": 2291
-      },
-      "Property": 5559,
-      "Shapes": 19118,
-      "Sort": 6887,
-      "Stats": 6557,
-      "Strings": 22026
-    },
-    "vis": {
-      "axis": {
-        "Axes": 1302,
-        "Axis": 24593,
-        "AxisGridLine": 652,
-        "AxisLabel": 636,
-        "CartesianAxes": 6703
-      },
-      "controls": {
-        "AnchorControl": 2138,
-        "ClickControl": 3824,
-        "Control": 1353,
-        "ControlList": 4665,
-        "DragControl": 2649,
-        "ExpandControl": 2832,
-        "HoverControl": 4896,
-        "IControl": 763,
-        "PanZoomControl": 5222,
-        "SelectionControl": 7862,
-        "TooltipControl": 8435
-      },
-      "data": {
-        "Data": 20544,
-        "DataList": 19788,
-        "DataSprite": 10349,
-        "EdgeSprite": 3301,
-        "NodeSprite": 19382,
-        "render": {
-          "ArrowType": 698,
-          "EdgeRenderer": 5569,
-          "IRenderer": 353,
-          "ShapeRenderer": 2247
-        },
-        "ScaleBinding": 11275,
-        "Tree": 7147,
-        "TreeBuilder": 9930
-      },
-      "events": {
-        "DataEvent": 2313,
-        "SelectionEvent": 1880,
-        "TooltipEvent": 1701,
-        "VisualizationEvent": 1117
-      },
-      "legend": {
-        "Legend": 20859,
-        "LegendItem": 4614,
-        "LegendRange": 10530
-      },
-      "operator": {
-        "distortion": {
-          "BifocalDistortion": 4461,
-          "Distortion": 6314,
-          "FisheyeDistortion": 3444
-        },
-        "encoder": {
-          "ColorEncoder": 3179,
-          "Encoder": 4060,
-          "PropertyEncoder": 4138,
-          "ShapeEncoder": 1690,
-          "SizeEncoder": 1830
-        },
-        "filter": {
-          "FisheyeTreeFilter": 5219,
-          "GraphDistanceFilter": 3165,
-          "VisibilityFilter": 3509
-        },
-        "IOperator": 1286,
-        "label": {
-          "Labeler": 9956,
-          "RadialLabeler": 3899,
-          "StackedAreaLabeler": 3202
-        },
-        "layout": {
-          "AxisLayout": 6725,
-          "BundledEdgeRouter": 3727,
-          "CircleLayout": 9317,
-          "CirclePackingLayout": 12003,
-          "DendrogramLayout": 4853,
-          "ForceDirectedLayout": 8411,
-          "IcicleTreeLayout": 4864,
-          "IndentedTreeLayout": 3174,
-          "Layout": 7881,
-          "NodeLinkTreeLayout": 12870,
-          "PieLayout": 2728,
-          "RadialTreeLayout": 12348,
-          "RandomLayout": 870,
-          "StackedAreaLayout": 9121,
-          "TreeMapLayout": 9191
-        },
-        "Operator": 2490,
-        "OperatorList": 5248,
-        "OperatorSequence": 4190,
-        "OperatorSwitch": 2581,
-        "SortOperator": 2023
-      },
-      "Visualization": 16540
-    }
-  }
+	"redis-server`_start": {
+		"svUnique": 0,
+		"svTotal": 1782,
+		"svChildren": {
+			"redis-server`main": {
+				"svUnique": 0,
+				"svTotal": 1782,
+				"svChildren": {
+					"redis-server`aeMain": {
+						"svUnique": 1,
+						"svTotal": 1780,
+						"svChildren": {
+							"redis-server`aeGetTime": {
+								"svUnique": 1,
+								"svTotal": 1,
+								"svChildren": {}
+							},
+							"redis-server`aeProcessEvents": {
+								"svUnique": 40,
+								"svTotal": 1774,
+								"svChildren": {
+									"libc.so.1`close": {
+										"svUnique": 1,
+										"svTotal": 1,
+										"svChildren": {}
+									},
+									"libc.so.1`free": {
+										"svUnique": 0,
+										"svTotal": 1,
+										"svChildren": {
+											"libc.so.1`mutex_unlock": {
+												"svUnique": 0,
+												"svTotal": 1,
+												"svChildren": {
+													"libc.so.1`clear_lockbyte": {
+														"svUnique": 1,
+														"svTotal": 1,
+														"svChildren": {}
+													}
+												}
+											}
+										}
+									},
+									"libc.so.1`gettimeofday": {
+										"svUnique": 17,
+										"svTotal": 17,
+										"svChildren": {}
+									},
+									"libc.so.1`port_getn": {
+										"svUnique": 1,
+										"svTotal": 1,
+										"svChildren": {}
+									},
+									"libc.so.1`read": {
+										"svUnique": 1,
+										"svTotal": 1,
+										"svChildren": {}
+									},
+									"libc.so.1`time": {
+										"svUnique": 1,
+										"svTotal": 1,
+										"svChildren": {}
+									},
+									"redis-server`0x425dc0": {
+										"svUnique": 1,
+										"svTotal": 1,
+										"svChildren": {}
+									},
+									"redis-server`acceptCommonHandler": {
+										"svUnique": 2,
+										"svTotal": 2,
+										"svChildren": {}
+									},
+									"redis-server`acceptTcpHandler": {
+										"svUnique": 0,
+										"svTotal": 111,
+										"svChildren": {
+											"libc.so.1`strcpy": {
+												"svUnique": 2,
+												"svTotal": 2,
+												"svChildren": {}
+											},
+											"libnsl.so.1`inet_ntoa": {
+												"svUnique": 2,
+												"svTotal": 2,
+												"svChildren": {}
+											},
+											"redis-server`acceptCommonHandler": {
+												"svUnique": 0,
+												"svTotal": 84,
+												"svChildren": {
+													"libc.so.1`time": {
+														"svUnique": 4,
+														"svTotal": 4,
+														"svChildren": {}
+													},
+													"redis-server`anetTcpNoDelay": {
+														"svUnique": 1,
+														"svTotal": 1,
+														"svChildren": {}
+													},
+													"redis-server`createClient": {
+														"svUnique": 2,
+														"svTotal": 76,
+														"svChildren": {
+															"libc.so.1`__time": {
+																"svUnique": 2,
+																"svTotal": 2,
+																"svChildren": {}
+															},
+															"libc.so.1`malloc": {
+																"svUnique": 1,
+																"svTotal": 1,
+																"svChildren": {}
+															},
+															"redis-server`aeCreateFileEvent": {
+																"svUnique": 2,
+																"svTotal": 2,
+																"svChildren": {}
+															},
+															"redis-server`anetNonBlock": {
+																"svUnique": 0,
+																"svTotal": 6,
+																"svChildren": {
+																	"libc.so.1`__fcntl": {
+																		"svUnique": 1,
+																		"svTotal": 1,
+																		"svChildren": {}
+																	},
+																	"libc.so.1`fcntl": {
+																		"svUnique": 3,
+																		"svTotal": 5,
+																		"svChildren": {
+																			"libc.so.1`__fcntl_syscall": {
+																				"svUnique": 2,
+																				"svTotal": 2,
+																				"svChildren": {}
+																			}
+																		}
+																	}
+																}
+															},
+															"redis-server`anetTcpNoDelay": {
+																"svUnique": 0,
+																"svTotal": 1,
+																"svChildren": {
+																	"libc.so.1`_so_setsockopt": {
+																		"svUnique": 1,
+																		"svTotal": 1,
+																		"svChildren": {}
+																	}
+																}
+															},
+															"redis-server`dictCreate": {
+																"svUnique": 0,
+																"svTotal": 8,
+																"svChildren": {
+																	"redis-server`zmalloc": {
+																		"svUnique": 0,
+																		"svTotal": 8,
+																		"svChildren": {
+																			"libc.so.1`malloc": {
+																				"svUnique": 1,
+																				"svTotal": 8,
+																				"svChildren": {
+																					"libc.so.1`_malloc_unlocked": {
+																						"svUnique": 2,
+																						"svTotal": 3,
+																						"svChildren": {
+																							"libc.so.1`t_delete": {
+																								"svUnique": 0,
+																								"svTotal": 1,
+																								"svChildren": {
+																									"libc.so.1`t_splay": {
+																										"svUnique": 1,
+																										"svTotal": 1,
+																										"svChildren": {}
+																									}
+																								}
+																							}
+																						}
+																					},
+																					"libc.so.1`mutex_lock": {
+																						"svUnique": 0,
+																						"svTotal": 1,
+																						"svChildren": {
+																							"libc.so.1`mutex_lock_impl": {
+																								"svUnique": 1,
+																								"svTotal": 1,
+																								"svChildren": {}
+																							}
+																						}
+																					},
+																					"libc.so.1`mutex_unlock": {
+																						"svUnique": 0,
+																						"svTotal": 2,
+																						"svChildren": {
+																							"libc.so.1`mutex_unlock_queue": {
+																								"svUnique": 0,
+																								"svTotal": 2,
+																								"svChildren": {
+																									"libc.so.1`clear_lockbyte": {
+																										"svUnique": 2,
+																										"svTotal": 2,
+																										"svChildren": {}
+																									}
+																								}
+																							}
+																						}
+																					},
+																					"libc.so.1`t_delete": {
+																						"svUnique": 1,
+																						"svTotal": 1,
+																						"svChildren": {}
+																					}
+																				}
+																			}
+																		}
+																	}
+																}
+															},
+															"redis-server`listAddNodeTail": {
+																"svUnique": 0,
+																"svTotal": 6,
+																"svChildren": {
+																	"redis-server`zmalloc": {
+																		"svUnique": 0,
+																		"svTotal": 6,
+																		"svChildren": {
+																			"libc.so.1`malloc": {
+																				"svUnique": 1,
+																				"svTotal": 6,
+																				"svChildren": {
+																					"libc.so.1`_malloc_unlocked": {
+																						"svUnique": 1,
+																						"svTotal": 4,
+																						"svChildren": {
+																							"libc.so.1`_smalloc": {
+																								"svUnique": 2,
+																								"svTotal": 2,
+																								"svChildren": {}
+																							},
+																							"libc.so.1`cleanfree": {
+																								"svUnique": 1,
+																								"svTotal": 1,
+																								"svChildren": {}
+																							}
+																						}
+																					},
+																					"libc.so.1`mutex_lock": {
+																						"svUnique": 0,
+																						"svTotal": 1,
+																						"svChildren": {
+																							"libc.so.1`mutex_lock_impl": {
+																								"svUnique": 1,
+																								"svTotal": 1,
+																								"svChildren": {}
+																							}
+																						}
+																					}
+																				}
+																			}
+																		}
+																	}
+																}
+															},
+															"redis-server`listCreate": {
+																"svUnique": 0,
+																"svTotal": 22,
+																"svChildren": {
+																	"redis-server`zmalloc": {
+																		"svUnique": 2,
+																		"svTotal": 22,
+																		"svChildren": {
+																			"libc.so.1`malloc": {
+																				"svUnique": 0,
+																				"svTotal": 20,
+																				"svChildren": {
+																					"libc.so.1`_malloc_unlocked": {
+																						"svUnique": 0,
+																						"svTotal": 11,
+																						"svChildren": {
+																							"libc.so.1`_smalloc": {
+																								"svUnique": 11,
+																								"svTotal": 11,
+																								"svChildren": {}
+																							}
+																						}
+																					},
+																					"libc.so.1`mutex_lock": {
+																						"svUnique": 0,
+																						"svTotal": 5,
+																						"svChildren": {
+																							"libc.so.1`mutex_lock_impl": {
+																								"svUnique": 4,
+																								"svTotal": 5,
+																								"svChildren": {
+																									"libc.so.1`sigon": {
+																										"svUnique": 1,
+																										"svTotal": 1,
+																										"svChildren": {}
+																									}
+																								}
+																							}
+																						}
+																					},
+																					"libc.so.1`mutex_unlock": {
+																						"svUnique": 0,
+																						"svTotal": 4,
+																						"svChildren": {
+																							"libc.so.1`mutex_unlock_queue": {
+																								"svUnique": 0,
+																								"svTotal": 4,
+																								"svChildren": {
+																									"libc.so.1`clear_lockbyte": {
+																										"svUnique": 4,
+																										"svTotal": 4,
+																										"svChildren": {}
+																									}
+																								}
+																							}
+																						}
+																					}
+																				}
+																			}
+																		}
+																	}
+																}
+															},
+															"redis-server`sdsnewlen": {
+																"svUnique": 0,
+																"svTotal": 8,
+																"svChildren": {
+																	"redis-server`zmalloc": {
+																		"svUnique": 1,
+																		"svTotal": 8,
+																		"svChildren": {
+																			"libc.so.1`malloc": {
+																				"svUnique": 0,
+																				"svTotal": 7,
+																				"svChildren": {
+																					"libc.so.1`_malloc_unlocked": {
+																						"svUnique": 0,
+																						"svTotal": 3,
+																						"svChildren": {
+																							"libc.so.1`_smalloc": {
+																								"svUnique": 3,
+																								"svTotal": 3,
+																								"svChildren": {}
+																							}
+																						}
+																					},
+																					"libc.so.1`mutex_lock": {
+																						"svUnique": 0,
+																						"svTotal": 4,
+																						"svChildren": {
+																							"libc.so.1`mutex_lock_impl": {
+																								"svUnique": 4,
+																								"svTotal": 4,
+																								"svChildren": {}
+																							}
+																						}
+																					}
+																				}
+																			}
+																		}
+																	}
+																}
+															},
+															"redis-server`zmalloc": {
+																"svUnique": 1,
+																"svTotal": 18,
+																"svChildren": {
+																	"libc.so.1`malloc": {
+																		"svUnique": 2,
+																		"svTotal": 17,
+																		"svChildren": {
+																			"libc.so.1`_malloc_unlocked": {
+																				"svUnique": 5,
+																				"svTotal": 5,
+																				"svChildren": {}
+																			},
+																			"libc.so.1`cleanfree": {
+																				"svUnique": 1,
+																				"svTotal": 1,
+																				"svChildren": {}
+																			},
+																			"libc.so.1`mutex_lock": {
+																				"svUnique": 0,
+																				"svTotal": 2,
+																				"svChildren": {
+																					"libc.so.1`mutex_lock_impl": {
+																						"svUnique": 1,
+																						"svTotal": 1,
+																						"svChildren": {}
+																					},
+																					"libc.so.1`sigon": {
+																						"svUnique": 1,
+																						"svTotal": 1,
+																						"svChildren": {}
+																					}
+																				}
+																			},
+																			"libc.so.1`mutex_lock_impl": {
+																				"svUnique": 2,
+																				"svTotal": 2,
+																				"svChildren": {}
+																			},
+																			"libc.so.1`mutex_unlock": {
+																				"svUnique": 1,
+																				"svTotal": 3,
+																				"svChildren": {
+																					"libc.so.1`clear_lockbyte": {
+																						"svUnique": 2,
+																						"svTotal": 2,
+																						"svChildren": {}
+																					}
+																				}
+																			},
+																			"libc.so.1`mutex_unlock_queue": {
+																				"svUnique": 2,
+																				"svTotal": 2,
+																				"svChildren": {}
+																			}
+																		}
+																	}
+																}
+															}
+														}
+													},
+													"redis-server`dictCreate": {
+														"svUnique": 1,
+														"svTotal": 1,
+														"svChildren": {}
+													},
+													"redis-server`sdsempty": {
+														"svUnique": 2,
+														"svTotal": 2,
+														"svChildren": {}
+													}
+												}
+											},
+											"redis-server`anetTcpAccept": {
+												"svUnique": 1,
+												"svTotal": 22,
+												"svChildren": {
+													"libnsl.so.1`inet_ntoa": {
+														"svUnique": 0,
+														"svTotal": 13,
+														"svChildren": {
+															"libc.so.1`sprintf": {
+																"svUnique": 1,
+																"svTotal": 1,
+																"svChildren": {}
+															},
+															"libnsl.so.1`inet_ntoa_r": {
+																"svUnique": 0,
+																"svTotal": 12,
+																"svChildren": {
+																	"libc.so.1`_ndoprnt": {
+																		"svUnique": 1,
+																		"svTotal": 1,
+																		"svChildren": {}
+																	},
+																	"libc.so.1`sprintf": {
+																		"svUnique": 1,
+																		"svTotal": 11,
+																		"svChildren": {
+																			"libc.so.1`_ndoprnt": {
+																				"svUnique": 9,
+																				"svTotal": 9,
+																				"svChildren": {}
+																			},
+																			"libc.so.1`ferror": {
+																				"svUnique": 1,
+																				"svTotal": 1,
+																				"svChildren": {}
+																			}
+																		}
+																	}
+																}
+															}
+														}
+													},
+													"libnsl.so.1`inet_ntoa_r": {
+														"svUnique": 1,
+														"svTotal": 1,
+														"svChildren": {}
+													},
+													"libsocket.so.1`accept": {
+														"svUnique": 2,
+														"svTotal": 2,
+														"svChildren": {}
+													},
+													"redis-server`anetGenericAccept": {
+														"svUnique": 0,
+														"svTotal": 5,
+														"svChildren": {
+															"libc.so.1`_so_accept": {
+																"svUnique": 1,
+																"svTotal": 1,
+																"svChildren": {}
+															},
+															"libsocket.so.1`accept": {
+																"svUnique": 0,
+																"svTotal": 4,
+																"svChildren": {
+																	"libc.so.1`__so_accept": {
+																		"svUnique": 3,
+																		"svTotal": 3,
+																		"svChildren": {}
+																	},
+																	"libc.so.1`_so_accept": {
+																		"svUnique": 1,
+																		"svTotal": 1,
+																		"svChildren": {}
+																	}
+																}
+															}
+														}
+													}
+												}
+											},
+											"redis-server`redisLog": {
+												"svUnique": 1,
+												"svTotal": 1,
+												"svChildren": {}
+											}
+										}
+									},
+									"redis-server`aeApiAssociate": {
+										"svUnique": 1,
+										"svTotal": 1,
+										"svChildren": {}
+									},
+									"redis-server`aeApiPoll.clone.1": {
+										"svUnique": 21,
+										"svTotal": 79,
+										"svChildren": {
+											"libc.so.1`_portfs": {
+												"svUnique": 10,
+												"svTotal": 10,
+												"svChildren": {}
+											},
+											"libc.so.1`port_associate": {
+												"svUnique": 2,
+												"svTotal": 2,
+												"svChildren": {}
+											},
+											"redis-server`0x425dd0": {
+												"svUnique": 2,
+												"svTotal": 2,
+												"svChildren": {}
+											},
+											"redis-server`aeApiAssociate": {
+												"svUnique": 5,
+												"svTotal": 44,
+												"svChildren": {
+													"libc.so.1`_portfs": {
+														"svUnique": 28,
+														"svTotal": 28,
+														"svChildren": {}
+													},
+													"libc.so.1`port_associate": {
+														"svUnique": 11,
+														"svTotal": 11,
+														"svChildren": {}
+													}
+												}
+											}
+										}
+									},
+									"redis-server`aeGetTime": {
+										"svUnique": 2,
+										"svTotal": 2,
+										"svChildren": {}
+									},
+									"redis-server`anetTcpAccept": {
+										"svUnique": 1,
+										"svTotal": 1,
+										"svChildren": {}
+									},
+									"redis-server`freeClient": {
+										"svUnique": 6,
+										"svTotal": 107,
+										"svChildren": {
+											"libc.so.1`__close": {
+												"svUnique": 3,
+												"svTotal": 3,
+												"svChildren": {}
+											},
+											"libc.so.1`close": {
+												"svUnique": 1,
+												"svTotal": 3,
+												"svChildren": {
+													"libc.so.1`_aio_close": {
+														"svUnique": 2,
+														"svTotal": 2,
+														"svChildren": {}
+													}
+												}
+											},
+											"libc.so.1`free": {
+												"svUnique": 0,
+												"svTotal": 15,
+												"svChildren": {
+													"libc.so.1`_free_unlocked": {
+														"svUnique": 3,
+														"svTotal": 3,
+														"svChildren": {}
+													},
+													"libc.so.1`mutex_lock": {
+														"svUnique": 0,
+														"svTotal": 7,
+														"svChildren": {
+															"libc.so.1`mutex_lock_impl": {
+																"svUnique": 6,
+																"svTotal": 7,
+																"svChildren": {
+																	"libc.so.1`sigon": {
+																		"svUnique": 1,
+																		"svTotal": 1,
+																		"svChildren": {}
+																	}
+																}
+															}
+														}
+													},
+													"libc.so.1`mutex_lock_impl": {
+														"svUnique": 1,
+														"svTotal": 1,
+														"svChildren": {}
+													},
+													"libc.so.1`mutex_unlock": {
+														"svUnique": 0,
+														"svTotal": 3,
+														"svChildren": {
+															"libc.so.1`clear_lockbyte": {
+																"svUnique": 1,
+																"svTotal": 1,
+																"svChildren": {}
+															},
+															"libc.so.1`mutex_unlock_queue": {
+																"svUnique": 1,
+																"svTotal": 2,
+																"svChildren": {
+																	"libc.so.1`clear_lockbyte": {
+																		"svUnique": 1,
+																		"svTotal": 1,
+																		"svChildren": {}
+																	}
+																}
+															}
+														}
+													},
+													"libc.so.1`mutex_unlock_queue": {
+														"svUnique": 1,
+														"svTotal": 1,
+														"svChildren": {}
+													}
+												}
+											},
+											"libc.so.1`mutex_unlock": {
+												"svUnique": 1,
+												"svTotal": 1,
+												"svChildren": {}
+											},
+											"redis-server`_dictClear": {
+												"svUnique": 1,
+												"svTotal": 1,
+												"svChildren": {}
+											},
+											"redis-server`aeDeleteFileEvent": {
+												"svUnique": 2,
+												"svTotal": 2,
+												"svChildren": {}
+											},
+											"redis-server`dictGetSafeIterator": {
+												"svUnique": 1,
+												"svTotal": 1,
+												"svChildren": {}
+											},
+											"redis-server`dictNext": {
+												"svUnique": 2,
+												"svTotal": 2,
+												"svChildren": {}
+											},
+											"redis-server`dictReleaseIterator": {
+												"svUnique": 1,
+												"svTotal": 1,
+												"svChildren": {}
+											},
+											"redis-server`freeClientMultiState": {
+												"svUnique": 1,
+												"svTotal": 1,
+												"svChildren": {}
+											},
+											"redis-server`listDelNode": {
+												"svUnique": 0,
+												"svTotal": 1,
+												"svChildren": {
+													"libc.so.1`free": {
+														"svUnique": 0,
+														"svTotal": 1,
+														"svChildren": {
+															"libc.so.1`_free_unlocked": {
+																"svUnique": 1,
+																"svTotal": 1,
+																"svChildren": {}
+															}
+														}
+													}
+												}
+											},
+											"redis-server`listRelease": {
+												"svUnique": 8,
+												"svTotal": 8,
+												"svChildren": {}
+											},
+											"redis-server`listRewind": {
+												"svUnique": 4,
+												"svTotal": 4,
+												"svChildren": {}
+											},
+											"redis-server`listSearchKey": {
+												"svUnique": 29,
+												"svTotal": 39,
+												"svChildren": {
+													"libc.so.1`free": {
+														"svUnique": 0,
+														"svTotal": 1,
+														"svChildren": {
+															"libc.so.1`mutex_lock": {
+																"svUnique": 0,
+																"svTotal": 1,
+																"svChildren": {
+																	"libc.so.1`mutex_lock_impl": {
+																		"svUnique": 1,
+																		"svTotal": 1,
+																		"svChildren": {}
+																	}
+																}
+															}
+														}
+													},
+													"redis-server`listGetIterator": {
+														"svUnique": 0,
+														"svTotal": 8,
+														"svChildren": {
+															"redis-server`zmalloc": {
+																"svUnique": 0,
+																"svTotal": 8,
+																"svChildren": {
+																	"libc.so.1`malloc": {
+																		"svUnique": 2,
+																		"svTotal": 8,
+																		"svChildren": {
+																			"libc.so.1`_malloc_unlocked": {
+																				"svUnique": 0,
+																				"svTotal": 3,
+																				"svChildren": {
+																					"libc.so.1`_smalloc": {
+																						"svUnique": 1,
+																						"svTotal": 1,
+																						"svChildren": {}
+																					},
+																					"libc.so.1`cleanfree": {
+																						"svUnique": 0,
+																						"svTotal": 2,
+																						"svChildren": {
+																							"libc.so.1`realfree": {
+																								"svUnique": 1,
+																								"svTotal": 2,
+																								"svChildren": {
+																									"libc.so.1`t_delete": {
+																										"svUnique": 0,
+																										"svTotal": 1,
+																										"svChildren": {
+																											"libc.so.1`t_splay": {
+																												"svUnique": 1,
+																												"svTotal": 1,
+																												"svChildren": {}
+																											}
+																										}
+																									}
+																								}
+																							}
+																						}
+																					}
+																				}
+																			},
+																			"libc.so.1`mutex_lock": {
+																				"svUnique": 0,
+																				"svTotal": 2,
+																				"svChildren": {
+																					"libc.so.1`mutex_lock_impl": {
+																						"svUnique": 2,
+																						"svTotal": 2,
+																						"svChildren": {}
+																					}
+																				}
+																			},
+																			"libc.so.1`mutex_unlock": {
+																				"svUnique": 0,
+																				"svTotal": 1,
+																				"svChildren": {
+																					"libc.so.1`mutex_unlock_queue": {
+																						"svUnique": 1,
+																						"svTotal": 1,
+																						"svChildren": {}
+																					}
+																				}
+																			}
+																		}
+																	}
+																}
+															}
+														}
+													},
+													"redis-server`zmalloc": {
+														"svUnique": 1,
+														"svTotal": 1,
+														"svChildren": {}
+													}
+												}
+											},
+											"redis-server`pubsubUnsubscribeAllChannels": {
+												"svUnique": 0,
+												"svTotal": 15,
+												"svChildren": {
+													"libc.so.1`free": {
+														"svUnique": 0,
+														"svTotal": 1,
+														"svChildren": {
+															"libc.so.1`_free_unlocked": {
+																"svUnique": 1,
+																"svTotal": 1,
+																"svChildren": {}
+															}
+														}
+													},
+													"redis-server`dictGetIterator": {
+														"svUnique": 1,
+														"svTotal": 1,
+														"svChildren": {}
+													},
+													"redis-server`dictGetSafeIterator": {
+														"svUnique": 0,
+														"svTotal": 13,
+														"svChildren": {
+															"redis-server`dictGetIterator": {
+																"svUnique": 0,
+																"svTotal": 11,
+																"svChildren": {
+																	"libc.so.1`malloc": {
+																		"svUnique": 1,
+																		"svTotal": 1,
+																		"svChildren": {}
+																	},
+																	"redis-server`zmalloc": {
+																		"svUnique": 0,
+																		"svTotal": 10,
+																		"svChildren": {
+																			"libc.so.1`malloc": {
+																				"svUnique": 0,
+																				"svTotal": 10,
+																				"svChildren": {
+																					"libc.so.1`_malloc_unlocked": {
+																						"svUnique": 0,
+																						"svTotal": 9,
+																						"svChildren": {
+																							"libc.so.1`cleanfree": {
+																								"svUnique": 0,
+																								"svTotal": 9,
+																								"svChildren": {
+																									"libc.so.1`realfree": {
+																										"svUnique": 5,
+																										"svTotal": 9,
+																										"svChildren": {
+																											"libc.so.1`t_delete": {
+																												"svUnique": 1,
+																												"svTotal": 4,
+																												"svChildren": {
+																													"libc.so.1`t_splay": {
+																														"svUnique": 3,
+																														"svTotal": 3,
+																														"svChildren": {}
+																													}
+																												}
+																											}
+																										}
+																									}
+																								}
+																							}
+																						}
+																					},
+																					"libc.so.1`mutex_lock": {
+																						"svUnique": 0,
+																						"svTotal": 1,
+																						"svChildren": {
+																							"libc.so.1`mutex_lock_impl": {
+																								"svUnique": 1,
+																								"svTotal": 1,
+																								"svChildren": {}
+																							}
+																						}
+																					}
+																				}
+																			}
+																		}
+																	}
+																}
+															},
+															"redis-server`zmalloc": {
+																"svUnique": 2,
+																"svTotal": 2,
+																"svChildren": {}
+															}
+														}
+													}
+												}
+											},
+											"redis-server`pubsubUnsubscribeAllPatterns": {
+												"svUnique": 2,
+												"svTotal": 2,
+												"svChildren": {}
+											},
+											"redis-server`unwatchAllKeys": {
+												"svUnique": 2,
+												"svTotal": 2,
+												"svChildren": {}
+											}
+										}
+									},
+									"redis-server`freeClientMultiState": {
+										"svUnique": 1,
+										"svTotal": 1,
+										"svChildren": {}
+									},
+									"redis-server`processInputBuffer": {
+										"svUnique": 1,
+										"svTotal": 1,
+										"svChildren": {}
+									},
+									"redis-server`readQueryFromClient": {
+										"svUnique": 83,
+										"svTotal": 1173,
+										"svChildren": {
+											"libc.so.1`__read": {
+												"svUnique": 9,
+												"svTotal": 9,
+												"svChildren": {}
+											},
+											"libc.so.1`__time": {
+												"svUnique": 16,
+												"svTotal": 16,
+												"svChildren": {}
+											},
+											"libc.so.1`read": {
+												"svUnique": 3,
+												"svTotal": 3,
+												"svChildren": {}
+											},
+											"libc.so.1`time": {
+												"svUnique": 5,
+												"svTotal": 5,
+												"svChildren": {}
+											},
+											"redis-server`processCommand": {
+												"svUnique": 1,
+												"svTotal": 1,
+												"svChildren": {}
+											},
+											"redis-server`processInputBuffer": {
+												"svUnique": 11,
+												"svTotal": 1041,
+												"svChildren": {
+													"libc.so.1`free": {
+														"svUnique": 2,
+														"svTotal": 2,
+														"svChildren": {}
+													},
+													"libc.so.1`strstr": {
+														"svUnique": 2,
+														"svTotal": 2,
+														"svChildren": {}
+													},
+													"redis-server`call": {
+														"svUnique": 1,
+														"svTotal": 1,
+														"svChildren": {}
+													},
+													"redis-server`createObject": {
+														"svUnique": 1,
+														"svTotal": 1,
+														"svChildren": {}
+													},
+													"redis-server`decrRefCount": {
+														"svUnique": 2,
+														"svTotal": 2,
+														"svChildren": {}
+													},
+													"redis-server`dictFetchValue": {
+														"svUnique": 4,
+														"svTotal": 4,
+														"svChildren": {}
+													},
+													"redis-server`lookupCommand": {
+														"svUnique": 4,
+														"svTotal": 4,
+														"svChildren": {}
+													},
+													"redis-server`processCommand": {
+														"svUnique": 63,
+														"svTotal": 586,
+														"svChildren": {
+															"libc.so.1`strcasecmp": {
+																"svUnique": 1,
+																"svTotal": 1,
+																"svChildren": {}
+															},
+															"redis-server`call": {
+																"svUnique": 16,
+																"svTotal": 471,
+																"svChildren": {
+																	"libc.so.1`gettimeofday": {
+																		"svUnique": 306,
+																		"svTotal": 306,
+																		"svChildren": {}
+																	},
+																	"redis-server`0x425dc0": {
+																		"svUnique": 4,
+																		"svTotal": 4,
+																		"svChildren": {}
+																	},
+																	"redis-server`_addReplyToBuffer": {
+																		"svUnique": 2,
+																		"svTotal": 2,
+																		"svChildren": {}
+																	},
+																	"redis-server`addReply": {
+																		"svUnique": 3,
+																		"svTotal": 136,
+																		"svChildren": {
+																			"libc.so.1`memcpy": {
+																				"svUnique": 8,
+																				"svTotal": 8,
+																				"svChildren": {}
+																			},
+																			"redis-server`0x426220": {
+																				"svUnique": 1,
+																				"svTotal": 1,
+																				"svChildren": {}
+																			},
+																			"redis-server`_addReplyToBuffer": {
+																				"svUnique": 4,
+																				"svTotal": 4,
+																				"svChildren": {}
+																			},
+																			"redis-server`prepareClientToWrite": {
+																				"svUnique": 26,
+																				"svTotal": 120,
+																				"svChildren": {
+																					"redis-server`aeCreateFileEvent": {
+																						"svUnique": 94,
+																						"svTotal": 94,
+																						"svChildren": {}
+																					}
+																				}
+																			}
+																		}
+																	},
+																	"redis-server`prepareClientToWrite": {
+																		"svUnique": 1,
+																		"svTotal": 1,
+																		"svChildren": {}
+																	},
+																	"redis-server`slowlogPushEntryIfNeeded": {
+																		"svUnique": 2,
+																		"svTotal": 2,
+																		"svChildren": {}
+																	},
+																	"redis-server`ustime": {
+																		"svUnique": 4,
+																		"svTotal": 4,
+																		"svChildren": {}
+																	}
+																}
+															},
+															"redis-server`dictFetchValue": {
+																"svUnique": 1,
+																"svTotal": 44,
+																"svChildren": {
+																	"redis-server`dictFind": {
+																		"svUnique": 13,
+																		"svTotal": 38,
+																		"svChildren": {
+																			"libc.so.1`strcasecmp": {
+																				"svUnique": 2,
+																				"svTotal": 2,
+																				"svChildren": {}
+																			},
+																			"libc.so.1`tolower": {
+																				"svUnique": 1,
+																				"svTotal": 1,
+																				"svChildren": {}
+																			},
+																			"redis-server`0x425fe0": {
+																				"svUnique": 3,
+																				"svTotal": 3,
+																				"svChildren": {}
+																			},
+																			"redis-server`0x426010": {
+																				"svUnique": 2,
+																				"svTotal": 2,
+																				"svChildren": {}
+																			},
+																			"redis-server`dictGenCaseHashFunction": {
+																				"svUnique": 5,
+																				"svTotal": 7,
+																				"svChildren": {
+																					"libc.so.1`tolower": {
+																						"svUnique": 2,
+																						"svTotal": 2,
+																						"svChildren": {}
+																					}
+																				}
+																			},
+																			"redis-server`dictSdsKeyCaseCompare": {
+																				"svUnique": 1,
+																				"svTotal": 10,
+																				"svChildren": {
+																					"libc.so.1`strcasecmp": {
+																						"svUnique": 9,
+																						"svTotal": 9,
+																						"svChildren": {}
+																					}
+																				}
+																			}
+																		}
+																	},
+																	"redis-server`dictGenCaseHashFunction": {
+																		"svUnique": 2,
+																		"svTotal": 2,
+																		"svChildren": {}
+																	},
+																	"redis-server`dictSdsCaseHash": {
+																		"svUnique": 1,
+																		"svTotal": 1,
+																		"svChildren": {}
+																	},
+																	"redis-server`dictSdsKeyCaseCompare": {
+																		"svUnique": 2,
+																		"svTotal": 2,
+																		"svChildren": {}
+																	}
+																}
+															},
+															"redis-server`dictFind": {
+																"svUnique": 2,
+																"svTotal": 2,
+																"svChildren": {}
+															},
+															"redis-server`slowlogPushEntryIfNeeded": {
+																"svUnique": 3,
+																"svTotal": 3,
+																"svChildren": {}
+															},
+															"redis-server`ustime": {
+																"svUnique": 2,
+																"svTotal": 2,
+																"svChildren": {}
+															}
+														}
+													},
+													"redis-server`processInlineBuffer": {
+														"svUnique": 8,
+														"svTotal": 335,
+														"svChildren": {
+															"libc.so.1`_free_unlocked": {
+																"svUnique": 3,
+																"svTotal": 3,
+																"svChildren": {}
+															},
+															"libc.so.1`free": {
+																"svUnique": 2,
+																"svTotal": 40,
+																"svChildren": {
+																	"libc.so.1`_free_unlocked": {
+																		"svUnique": 7,
+																		"svTotal": 7,
+																		"svChildren": {}
+																	},
+																	"libc.so.1`mutex_lock": {
+																		"svUnique": 3,
+																		"svTotal": 14,
+																		"svChildren": {
+																			"libc.so.1`mutex_lock_impl": {
+																				"svUnique": 11,
+																				"svTotal": 11,
+																				"svChildren": {}
+																			}
+																		}
+																	},
+																	"libc.so.1`mutex_lock_impl": {
+																		"svUnique": 1,
+																		"svTotal": 1,
+																		"svChildren": {}
+																	},
+																	"libc.so.1`mutex_unlock": {
+																		"svUnique": 3,
+																		"svTotal": 15,
+																		"svChildren": {
+																			"libc.so.1`clear_lockbyte": {
+																				"svUnique": 1,
+																				"svTotal": 1,
+																				"svChildren": {}
+																			},
+																			"libc.so.1`mutex_unlock_queue": {
+																				"svUnique": 3,
+																				"svTotal": 11,
+																				"svChildren": {
+																					"libc.so.1`clear_lockbyte": {
+																						"svUnique": 7,
+																						"svTotal": 7,
+																						"svChildren": {}
+																					},
+																					"libc.so.1`sigon": {
+																						"svUnique": 1,
+																						"svTotal": 1,
+																						"svChildren": {}
+																					}
+																				}
+																			}
+																		}
+																	},
+																	"libc.so.1`mutex_unlock_queue": {
+																		"svUnique": 1,
+																		"svTotal": 1,
+																		"svChildren": {}
+																	}
+																}
+															},
+															"libc.so.1`mutex_lock": {
+																"svUnique": 1,
+																"svTotal": 1,
+																"svChildren": {}
+															},
+															"libc.so.1`mutex_unlock": {
+																"svUnique": 1,
+																"svTotal": 1,
+																"svChildren": {}
+															},
+															"libc.so.1`strstr": {
+																"svUnique": 6,
+																"svTotal": 6,
+																"svChildren": {}
+															},
+															"redis-server`createObject": {
+																"svUnique": 3,
+																"svTotal": 49,
+																"svChildren": {
+																	"libc.so.1`malloc": {
+																		"svUnique": 1,
+																		"svTotal": 1,
+																		"svChildren": {}
+																	},
+																	"redis-server`0x426270": {
+																		"svUnique": 1,
+																		"svTotal": 1,
+																		"svChildren": {}
+																	},
+																	"redis-server`zmalloc": {
+																		"svUnique": 3,
+																		"svTotal": 44,
+																		"svChildren": {
+																			"libc.so.1`malloc": {
+																				"svUnique": 2,
+																				"svTotal": 41,
+																				"svChildren": {
+																					"libc.so.1`_malloc_unlocked": {
+																						"svUnique": 1,
+																						"svTotal": 8,
+																						"svChildren": {
+																							"libc.so.1`_smalloc": {
+																								"svUnique": 4,
+																								"svTotal": 4,
+																								"svChildren": {}
+																							},
+																							"libc.so.1`cleanfree": {
+																								"svUnique": 3,
+																								"svTotal": 3,
+																								"svChildren": {}
+																							}
+																						}
+																					},
+																					"libc.so.1`_smalloc": {
+																						"svUnique": 2,
+																						"svTotal": 2,
+																						"svChildren": {}
+																					},
+																					"libc.so.1`cleanfree": {
+																						"svUnique": 1,
+																						"svTotal": 1,
+																						"svChildren": {}
+																					},
+																					"libc.so.1`mutex_lock": {
+																						"svUnique": 1,
+																						"svTotal": 15,
+																						"svChildren": {
+																							"libc.so.1`mutex_lock_impl": {
+																								"svUnique": 13,
+																								"svTotal": 14,
+																								"svChildren": {
+																									"libc.so.1`sigon": {
+																										"svUnique": 1,
+																										"svTotal": 1,
+																										"svChildren": {}
+																									}
+																								}
+																							}
+																						}
+																					},
+																					"libc.so.1`mutex_lock_impl": {
+																						"svUnique": 1,
+																						"svTotal": 1,
+																						"svChildren": {}
+																					},
+																					"libc.so.1`mutex_unlock": {
+																						"svUnique": 2,
+																						"svTotal": 11,
+																						"svChildren": {
+																							"libc.so.1`mutex_unlock_queue": {
+																								"svUnique": 0,
+																								"svTotal": 8,
+																								"svChildren": {
+																									"libc.so.1`clear_lockbyte": {
+																										"svUnique": 8,
+																										"svTotal": 8,
+																										"svChildren": {}
+																									}
+																								}
+																							},
+																							"libc.so.1`sigon": {
+																								"svUnique": 1,
+																								"svTotal": 1,
+																								"svChildren": {}
+																							}
+																						}
+																					},
+																					"libc.so.1`mutex_unlock_queue": {
+																						"svUnique": 1,
+																						"svTotal": 1,
+																						"svChildren": {}
+																					}
+																				}
+																			}
+																		}
+																	}
+																}
+															},
+															"redis-server`sdsrange": {
+																"svUnique": 2,
+																"svTotal": 2,
+																"svChildren": {}
+															},
+															"redis-server`sdssplitlen": {
+																"svUnique": 58,
+																"svTotal": 186,
+																"svChildren": {
+																	"libc.so.1`malloc": {
+																		"svUnique": 1,
+																		"svTotal": 1,
+																		"svChildren": {}
+																	},
+																	"libc.so.1`memcpy": {
+																		"svUnique": 9,
+																		"svTotal": 9,
+																		"svChildren": {}
+																	},
+																	"redis-server`0x426270": {
+																		"svUnique": 1,
+																		"svTotal": 1,
+																		"svChildren": {}
+																	},
+																	"redis-server`sdsnewlen": {
+																		"svUnique": 6,
+																		"svTotal": 47,
+																		"svChildren": {
+																			"redis-server`0x426270": {
+																				"svUnique": 2,
+																				"svTotal": 2,
+																				"svChildren": {}
+																			},
+																			"redis-server`zmalloc": {
+																				"svUnique": 4,
+																				"svTotal": 39,
+																				"svChildren": {
+																					"libc.so.1`malloc": {
+																						"svUnique": 4,
+																						"svTotal": 34,
+																						"svChildren": {
+																							"libc.so.1`_malloc_unlocked": {
+																								"svUnique": 1,
+																								"svTotal": 9,
+																								"svChildren": {
+																									"libc.so.1`_smalloc": {
+																										"svUnique": 4,
+																										"svTotal": 4,
+																										"svChildren": {}
+																									},
+																									"libc.so.1`cleanfree": {
+																										"svUnique": 4,
+																										"svTotal": 4,
+																										"svChildren": {}
+																									}
+																								}
+																							},
+																							"libc.so.1`mutex_lock": {
+																								"svUnique": 1,
+																								"svTotal": 7,
+																								"svChildren": {
+																									"libc.so.1`mutex_lock_impl": {
+																										"svUnique": 6,
+																										"svTotal": 6,
+																										"svChildren": {}
+																									}
+																								}
+																							},
+																							"libc.so.1`mutex_unlock": {
+																								"svUnique": 4,
+																								"svTotal": 13,
+																								"svChildren": {
+																									"libc.so.1`mutex_unlock_queue": {
+																										"svUnique": 1,
+																										"svTotal": 9,
+																										"svChildren": {
+																											"libc.so.1`clear_lockbyte": {
+																												"svUnique": 7,
+																												"svTotal": 7,
+																												"svChildren": {}
+																											},
+																											"libc.so.1`sigon": {
+																												"svUnique": 1,
+																												"svTotal": 1,
+																												"svChildren": {}
+																											}
+																										}
+																									}
+																								}
+																							},
+																							"libc.so.1`mutex_unlock_queue": {
+																								"svUnique": 1,
+																								"svTotal": 1,
+																								"svChildren": {}
+																							}
+																						}
+																					},
+																					"libc.so.1`mutex_unlock": {
+																						"svUnique": 1,
+																						"svTotal": 1,
+																						"svChildren": {}
+																					}
+																				}
+																			}
+																		}
+																	},
+																	"redis-server`zmalloc": {
+																		"svUnique": 10,
+																		"svTotal": 70,
+																		"svChildren": {
+																			"libc.so.1`malloc": {
+																				"svUnique": 6,
+																				"svTotal": 58,
+																				"svChildren": {
+																					"libc.so.1`_malloc_unlocked": {
+																						"svUnique": 6,
+																						"svTotal": 25,
+																						"svChildren": {
+																							"libc.so.1`_smalloc": {
+																								"svUnique": 5,
+																								"svTotal": 5,
+																								"svChildren": {}
+																							},
+																							"libc.so.1`cleanfree": {
+																								"svUnique": 3,
+																								"svTotal": 12,
+																								"svChildren": {
+																									"libc.so.1`realfree": {
+																										"svUnique": 9,
+																										"svTotal": 9,
+																										"svChildren": {}
+																									}
+																								}
+																							},
+																							"libc.so.1`realfree": {
+																								"svUnique": 2,
+																								"svTotal": 2,
+																								"svChildren": {}
+																							}
+																						}
+																					},
+																					"libc.so.1`cleanfree": {
+																						"svUnique": 1,
+																						"svTotal": 1,
+																						"svChildren": {}
+																					},
+																					"libc.so.1`mutex_lock": {
+																						"svUnique": 0,
+																						"svTotal": 10,
+																						"svChildren": {
+																							"libc.so.1`mutex_lock_impl": {
+																								"svUnique": 10,
+																								"svTotal": 10,
+																								"svChildren": {}
+																							}
+																						}
+																					},
+																					"libc.so.1`mutex_lock_impl": {
+																						"svUnique": 2,
+																						"svTotal": 2,
+																						"svChildren": {}
+																					},
+																					"libc.so.1`mutex_unlock": {
+																						"svUnique": 3,
+																						"svTotal": 13,
+																						"svChildren": {
+																							"libc.so.1`clear_lockbyte": {
+																								"svUnique": 3,
+																								"svTotal": 3,
+																								"svChildren": {}
+																							},
+																							"libc.so.1`mutex_unlock_queue": {
+																								"svUnique": 4,
+																								"svTotal": 7,
+																								"svChildren": {
+																									"libc.so.1`clear_lockbyte": {
+																										"svUnique": 3,
+																										"svTotal": 3,
+																										"svChildren": {}
+																									}
+																								}
+																							}
+																						}
+																					},
+																					"libc.so.1`mutex_unlock_queue": {
+																						"svUnique": 1,
+																						"svTotal": 1,
+																						"svChildren": {}
+																					}
+																				}
+																			},
+																			"libc.so.1`mutex_lock": {
+																				"svUnique": 1,
+																				"svTotal": 1,
+																				"svChildren": {}
+																			},
+																			"libc.so.1`mutex_unlock": {
+																				"svUnique": 1,
+																				"svTotal": 1,
+																				"svChildren": {}
+																			}
+																		}
+																	}
+																}
+															},
+															"redis-server`zmalloc": {
+																"svUnique": 14,
+																"svTotal": 39,
+																"svChildren": {
+																	"libc.so.1`_malloc_unlocked": {
+																		"svUnique": 1,
+																		"svTotal": 1,
+																		"svChildren": {}
+																	},
+																	"libc.so.1`malloc": {
+																		"svUnique": 1,
+																		"svTotal": 23,
+																		"svChildren": {
+																			"libc.so.1`_malloc_unlocked": {
+																				"svUnique": 1,
+																				"svTotal": 4,
+																				"svChildren": {
+																					"libc.so.1`_smalloc": {
+																						"svUnique": 3,
+																						"svTotal": 3,
+																						"svChildren": {}
+																					}
+																				}
+																			},
+																			"libc.so.1`mutex_lock": {
+																				"svUnique": 1,
+																				"svTotal": 10,
+																				"svChildren": {
+																					"libc.so.1`mutex_lock_impl": {
+																						"svUnique": 8,
+																						"svTotal": 9,
+																						"svChildren": {
+																							"libc.so.1`sigon": {
+																								"svUnique": 1,
+																								"svTotal": 1,
+																								"svChildren": {}
+																							}
+																						}
+																					}
+																				}
+																			},
+																			"libc.so.1`mutex_unlock": {
+																				"svUnique": 0,
+																				"svTotal": 8,
+																				"svChildren": {
+																					"libc.so.1`mutex_unlock_queue": {
+																						"svUnique": 4,
+																						"svTotal": 8,
+																						"svChildren": {
+																							"libc.so.1`clear_lockbyte": {
+																								"svUnique": 3,
+																								"svTotal": 3,
+																								"svChildren": {}
+																							},
+																							"libc.so.1`sigon": {
+																								"svUnique": 1,
+																								"svTotal": 1,
+																								"svChildren": {}
+																							}
+																						}
+																					}
+																				}
+																			}
+																		}
+																	},
+																	"libc.so.1`mutex_unlock": {
+																		"svUnique": 1,
+																		"svTotal": 1,
+																		"svChildren": {}
+																	}
+																}
+															}
+														}
+													},
+													"redis-server`resetClient": {
+														"svUnique": 4,
+														"svTotal": 64,
+														"svChildren": {
+															"libc.so.1`_free_unlocked": {
+																"svUnique": 1,
+																"svTotal": 1,
+																"svChildren": {}
+															},
+															"libc.so.1`free": {
+																"svUnique": 0,
+																"svTotal": 16,
+																"svChildren": {
+																	"libc.so.1`_free_unlocked": {
+																		"svUnique": 1,
+																		"svTotal": 1,
+																		"svChildren": {}
+																	},
+																	"libc.so.1`mutex_lock": {
+																		"svUnique": 0,
+																		"svTotal": 2,
+																		"svChildren": {
+																			"libc.so.1`mutex_lock_impl": {
+																				"svUnique": 2,
+																				"svTotal": 2,
+																				"svChildren": {}
+																			}
+																		}
+																	},
+																	"libc.so.1`mutex_unlock": {
+																		"svUnique": 3,
+																		"svTotal": 13,
+																		"svChildren": {
+																			"libc.so.1`mutex_unlock_queue": {
+																				"svUnique": 3,
+																				"svTotal": 10,
+																				"svChildren": {
+																					"libc.so.1`clear_lockbyte": {
+																						"svUnique": 6,
+																						"svTotal": 6,
+																						"svChildren": {}
+																					},
+																					"libc.so.1`sigon": {
+																						"svUnique": 1,
+																						"svTotal": 1,
+																						"svChildren": {}
+																					}
+																				}
+																			}
+																		}
+																	}
+																}
+															},
+															"libc.so.1`mutex_unlock": {
+																"svUnique": 2,
+																"svTotal": 2,
+																"svChildren": {}
+															},
+															"redis-server`decrRefCount": {
+																"svUnique": 3,
+																"svTotal": 27,
+																"svChildren": {
+																	"libc.so.1`free": {
+																		"svUnique": 4,
+																		"svTotal": 23,
+																		"svChildren": {
+																			"libc.so.1`mutex_lock": {
+																				"svUnique": 1,
+																				"svTotal": 9,
+																				"svChildren": {
+																					"libc.so.1`mutex_lock_impl": {
+																						"svUnique": 7,
+																						"svTotal": 8,
+																						"svChildren": {
+																							"libc.so.1`sigon": {
+																								"svUnique": 1,
+																								"svTotal": 1,
+																								"svChildren": {}
+																							}
+																						}
+																					}
+																				}
+																			},
+																			"libc.so.1`mutex_lock_impl": {
+																				"svUnique": 1,
+																				"svTotal": 1,
+																				"svChildren": {}
+																			},
+																			"libc.so.1`mutex_unlock": {
+																				"svUnique": 3,
+																				"svTotal": 8,
+																				"svChildren": {
+																					"libc.so.1`mutex_unlock_queue": {
+																						"svUnique": 2,
+																						"svTotal": 5,
+																						"svChildren": {
+																							"libc.so.1`clear_lockbyte": {
+																								"svUnique": 2,
+																								"svTotal": 2,
+																								"svChildren": {}
+																							},
+																							"libc.so.1`sigon": {
+																								"svUnique": 1,
+																								"svTotal": 1,
+																								"svChildren": {}
+																							}
+																						}
+																					}
+																				}
+																			},
+																			"libc.so.1`mutex_unlock_queue": {
+																				"svUnique": 1,
+																				"svTotal": 1,
+																				"svChildren": {}
+																			}
+																		}
+																	},
+																	"libc.so.1`mutex_unlock": {
+																		"svUnique": 1,
+																		"svTotal": 1,
+																		"svChildren": {}
+																	}
+																}
+															},
+															"redis-server`freeStringObject": {
+																"svUnique": 3,
+																"svTotal": 3,
+																"svChildren": {}
+															},
+															"redis-server`sdsfree": {
+																"svUnique": 1,
+																"svTotal": 1,
+																"svChildren": {}
+															},
+															"redis-server`zfree": {
+																"svUnique": 10,
+																"svTotal": 10,
+																"svChildren": {}
+															}
+														}
+													},
+													"redis-server`sdssplitlen": {
+														"svUnique": 2,
+														"svTotal": 2,
+														"svChildren": {}
+													},
+													"redis-server`zfree": {
+														"svUnique": 25,
+														"svTotal": 25,
+														"svChildren": {}
+													},
+													"redis-server`zmalloc": {
+														"svUnique": 2,
+														"svTotal": 2,
+														"svChildren": {}
+													}
+												}
+											},
+											"redis-server`resetClient": {
+												"svUnique": 2,
+												"svTotal": 2,
+												"svChildren": {}
+											},
+											"redis-server`sdsMakeRoomFor": {
+												"svUnique": 1,
+												"svTotal": 13,
+												"svChildren": {
+													"redis-server`zrealloc": {
+														"svUnique": 0,
+														"svTotal": 12,
+														"svChildren": {
+															"libc.so.1`realloc": {
+																"svUnique": 1,
+																"svTotal": 12,
+																"svChildren": {
+																	"libc.so.1`_free_unlocked": {
+																		"svUnique": 1,
+																		"svTotal": 1,
+																		"svChildren": {}
+																	},
+																	"libc.so.1`_malloc_unlocked": {
+																		"svUnique": 4,
+																		"svTotal": 6,
+																		"svChildren": {
+																			"libc.so.1`cleanfree": {
+																				"svUnique": 1,
+																				"svTotal": 1,
+																				"svChildren": {}
+																			},
+																			"libc.so.1`realfree": {
+																				"svUnique": 1,
+																				"svTotal": 1,
+																				"svChildren": {}
+																			}
+																		}
+																	},
+																	"libc.so.1`cleanfree": {
+																		"svUnique": 0,
+																		"svTotal": 1,
+																		"svChildren": {
+																			"libc.so.1`realfree": {
+																				"svUnique": 1,
+																				"svTotal": 1,
+																				"svChildren": {}
+																			}
+																		}
+																	},
+																	"libc.so.1`mutex_unlock": {
+																		"svUnique": 1,
+																		"svTotal": 3,
+																		"svChildren": {
+																			"libc.so.1`mutex_unlock_queue": {
+																				"svUnique": 1,
+																				"svTotal": 2,
+																				"svChildren": {
+																					"libc.so.1`clear_lockbyte": {
+																						"svUnique": 1,
+																						"svTotal": 1,
+																						"svChildren": {}
+																					}
+																				}
+																			}
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									},
+									"redis-server`redisLog": {
+										"svUnique": 2,
+										"svTotal": 2,
+										"svChildren": {}
+									},
+									"redis-server`sdsIncrLen": {
+										"svUnique": 1,
+										"svTotal": 1,
+										"svChildren": {}
+									},
+									"redis-server`sdsfree": {
+										"svUnique": 1,
+										"svTotal": 1,
+										"svChildren": {}
+									},
+									"redis-server`sendReplyToClient": {
+										"svUnique": 72,
+										"svTotal": 218,
+										"svChildren": {
+											"libc.so.1`__time": {
+												"svUnique": 9,
+												"svTotal": 9,
+												"svChildren": {}
+											},
+											"libc.so.1`__write": {
+												"svUnique": 14,
+												"svTotal": 14,
+												"svChildren": {}
+											},
+											"libc.so.1`time": {
+												"svUnique": 1,
+												"svTotal": 1,
+												"svChildren": {}
+											},
+											"libc.so.1`write": {
+												"svUnique": 12,
+												"svTotal": 12,
+												"svChildren": {}
+											},
+											"redis-server`aeDeleteFileEvent": {
+												"svUnique": 110,
+												"svTotal": 110,
+												"svChildren": {}
+											}
+										}
+									},
+									"redis-server`serverCron": {
+										"svUnique": 0,
+										"svTotal": 8,
+										"svChildren": {
+											"redis-server`activeExpireCycle": {
+												"svUnique": 0,
+												"svTotal": 4,
+												"svChildren": {
+													"redis-server`mstime": {
+														"svUnique": 0,
+														"svTotal": 4,
+														"svChildren": {
+															"libc.so.1`gettimeofday": {
+																"svUnique": 4,
+																"svTotal": 4,
+																"svChildren": {}
+															}
+														}
+													}
+												}
+											},
+											"redis-server`clientsCron": {
+												"svUnique": 0,
+												"svTotal": 4,
+												"svChildren": {
+													"redis-server`clientsCronResizeQueryBuffer": {
+														"svUnique": 1,
+														"svTotal": 2,
+														"svChildren": {
+															"redis-server`sdsRemoveFreeSpace": {
+																"svUnique": 0,
+																"svTotal": 1,
+																"svChildren": {
+																	"redis-server`zrealloc": {
+																		"svUnique": 0,
+																		"svTotal": 1,
+																		"svChildren": {
+																			"libc.so.1`realloc": {
+																				"svUnique": 0,
+																				"svTotal": 1,
+																				"svChildren": {
+																					"libc.so.1`_malloc_unlocked": {
+																						"svUnique": 0,
+																						"svTotal": 1,
+																						"svChildren": {
+																							"libc.so.1`_smalloc": {
+																								"svUnique": 1,
+																								"svTotal": 1,
+																								"svChildren": {}
+																							}
+																						}
+																					}
+																				}
+																			}
+																		}
+																	}
+																}
+															}
+														}
+													},
+													"redis-server`sdsAllocSize": {
+														"svUnique": 2,
+														"svTotal": 2,
+														"svChildren": {}
+													}
+												}
+											}
+										}
+									},
+									"redis-server`zfree": {
+										"svUnique": 3,
+										"svTotal": 3,
+										"svChildren": {}
+									}
+								}
+							},
+							"redis-server`beforeSleep": {
+								"svUnique": 1,
+								"svTotal": 1,
+								"svChildren": {}
+							},
+							"redis-server`flushAppendOnlyFile": {
+								"svUnique": 1,
+								"svTotal": 1,
+								"svChildren": {}
+							},
+							"redis-server`freeClient": {
+								"svUnique": 1,
+								"svTotal": 1,
+								"svChildren": {}
+							},
+							"redis-server`readQueryFromClient": {
+								"svUnique": 1,
+								"svTotal": 1,
+								"svChildren": {}
+							}
+						}
+					},
+					"redis-server`flushAppendOnlyFile": {
+						"svUnique": 2,
+						"svTotal": 2,
+						"svChildren": {}
+					}
+				}
+			}
+		}
+	}
 }

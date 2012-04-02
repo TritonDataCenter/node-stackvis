@@ -1,0 +1,32 @@
+#!/usr/bin/env node
+
+/*
+ * cmd/stackvis: convert stacks between different representations
+ */
+
+var mod_bunyan = require('bunyan');
+
+var mod_stackvis = require('../lib/stackvis');
+
+var log = new mod_bunyan({
+    'name': 'stackvis',
+    'stream': process.stderr
+});
+
+if (process.argv.length != 4) {
+	console.error('usage: stackvis input-format output-format');
+	process.exit(2);
+}
+
+var reader, writer;
+
+try {
+	reader = new mod_stackvis.readerLookup(process.argv[2]);
+	writer = new mod_stackvis.writerLookup(process.argv[3]);
+} catch (ex) {
+	console.error(ex.message);
+}
+
+mod_stackvis.pipeStacks(log, process.stdin, reader, writer, process.stdout,
+    function () {});
+process.stdin.resume();

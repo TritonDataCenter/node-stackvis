@@ -10,7 +10,7 @@
 	},
 
 	"dependencies": {
+		"bunyan": "0.6.8",
 		"carrier": "0.1.7"
-		"bunyan": "0.6.8"
 	}
 }
