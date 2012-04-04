@@ -3,6 +3,11 @@
 	"version": "0.0.1",
 	"description": "stack visualization tools",
 	"main": "./lib/stackvis.js",
+	"bin": {
+		"flamegraph": "./cmd/flamegraph",
+		"stackcollapse": "./cmd/stackcollapse",
+		"stackvis": "./cmd/stackvis"
+	},
 	
 	"repository": {
 		"type": "git",
