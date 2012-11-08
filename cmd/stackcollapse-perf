@@ -1,0 +1,20 @@
+#!/usr/bin/env node
+
+/*
+ * cmd/stackcollapse: emit collapsed stack traces from perf output
+ */
+
+var mod_bunyan = require('bunyan');
+var mod_stackvis = require('../lib/stackvis');
+
+var log = new mod_bunyan({
+    'name': 'stackcollapse',
+    'stream': process.stderr
+});
+
+var reader = mod_stackvis.readerLookup('perf');
+var writer = mod_stackvis.writerLookup('collapsed');
+
+mod_stackvis.pipeStacks(log, process.stdin, reader, writer, process.stdout,
+    function () {});
+process.stdin.resume();
