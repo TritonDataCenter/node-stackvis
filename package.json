@@ -1,6 +1,6 @@
 {
 	"name": "stackvis",
-	"version": "0.0.3",
+	"version": "0.0.4",
 	"description": "stack visualization tools",
 	"main": "./lib/stackvis.js",
 	"bin": {
