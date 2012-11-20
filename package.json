@@ -6,6 +6,8 @@
 	"bin": {
 		"flamegraph": "./cmd/flamegraph",
 		"stackcollapse": "./cmd/stackcollapse",
+		"stackcollapse-perf": "./cmd/stackcollapse-perf",
+		"stackcollapse-stap": "./cmd/stackcollapse-stap",
 		"stackvis": "./cmd/stackvis"
 	},
 	
