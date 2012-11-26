@@ -1,6 +1,6 @@
 {
 	"name": "stackvis",
-	"version": "0.0.4",
+	"version": "0.1.0",
 	"description": "stack visualization tools",
 	"main": "./lib/stackvis.js",
 	"bin": {
@@ -17,7 +17,7 @@
 	},
 
 	"dependencies": {
-		"bunyan": "0.6.8",
+		"bunyan": "0.16.7",
 		"carrier": "0.1.7"
 	}
 }
