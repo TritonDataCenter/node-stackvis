@@ -46,18 +46,18 @@ formats:
 Client code shouldn't load these directly.  Instead, require 'stackvis' and use
 lookupReader and lookupWriter:
 ```javascript
-    var mod_stackvis = require('stackvis');
-    var dtrace_reader = mod_stackvis.lookupReader('dtrace')
-    var collapsed_writer = mod_stackvis.lookupWriter('collapsed');
+var mod_stackvis = require('stackvis');
+var dtrace_reader = mod_stackvis.lookupReader('dtrace')
+var collapsed_writer = mod_stackvis.lookupWriter('collapsed');
 ```
 The main operation is translating from one representation to another (e.g.,
 DTrace output to a flame graph) using pipeStacks() (which requires a Bunyan
 logger):
 ```javascript
-    var mod_bunyan = require('bunyan');
-    var log = new mod_bunyan({ 'name': 'mytool', 'stream': process.stderr });
-    mod_stackvis.pipeStacks(log, process.stdin, dtrace_reader, collapsed_writer,
-        process.stdout, function () { console.error('translation finished'); });
+var mod_bunyan = require('bunyan');
+var log = new mod_bunyan({ 'name': 'mytool', 'stream': process.stderr });
+mod_stackvis.pipeStacks(log, process.stdin, dtrace_reader, collapsed_writer,
+    process.stdout, function () { console.error('translation finished'); });
 ```
 This example instantiates a new dtrace_reader to read DTrace output from
 process.stdin and then emits the result in collapsed form to process.stdout
