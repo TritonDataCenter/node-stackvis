@@ -47,8 +47,8 @@ Client code shouldn't load these directly.  Instead, require 'stackvis' and use
 lookupReader and lookupWriter:
 ```javascript
 var mod_stackvis = require('stackvis');
-var dtrace_reader = mod_stackvis.lookupReader('dtrace')
-var collapsed_writer = mod_stackvis.lookupWriter('collapsed');
+var dtrace_reader = mod_stackvis.readerLookup('dtrace');
+var collapsed_writer = mod_stackvis.writerLookup('collapsed');
 ```
 The main operation is translating from one representation to another (e.g.,
 DTrace output to a flame graph) using pipeStacks() (which requires a Bunyan
