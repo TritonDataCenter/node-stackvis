@@ -13,6 +13,8 @@
 #
 NPM		 = npm
 CATEST		 = tools/catest
+JSL		 = jsl
+JSSTYLE		 = jsstyle
 
 #
 # Files
@@ -42,5 +44,4 @@ all:
 test:
 	$(CATEST) $(JSTEST_FILES)
 
-include ./Makefile.deps
 include ./Makefile.targ
