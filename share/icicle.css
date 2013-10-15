@@ -14,7 +14,8 @@ a {
 }
 
 div#chart {
-	width: auto;
+	width: 100%;
+	margin-top: 20px;
 }
 
 rect.svBox {
@@ -44,4 +45,23 @@ div.svTooltip {
 	border: 0px;
 	border-radius: 2px;           
 	pointer-events: none;  
+}
+
+.svXAxisLabel {
+	font-size: large;
+	font-weight: bold;
+	font-variant: small-caps;
+	text-align: center;
+	width: 100%;
+	letter-spacing: 0.5em;
+	margin-bottom: 20px;
+}
+
+.svYAxisLabel {
+	font-size: large;
+	font-weight: bold;
+	font-variant: small-caps;
+	text-align: center;
+	letter-spacing: 0.5em;
+	white-space: nowrap;
 }

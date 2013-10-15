@@ -5,6 +5,9 @@
 /* Configuration */
 var svSvgWidth = null;		/* image width (null to auto-compute) */
 var svSvgHeight = null;		/* image height (null to auto-compute) */
+var svAxisLabelWidth = 45;	/* width of axis labels */
+var svChartWidth = null;	/* width of chart part of image */
+var svChartHeight = null;	/* height of chart part of image */
 var svGrowDown = false;		/* if true, stacks are drawn growing down */
 var svTransitionTime = 3000;	/* time for transition */
 var svCornerPixels = 3;		/* radius of rounded corners */
@@ -45,11 +48,8 @@ window.onload = svInit;
 
 function svInit()
 {
-	if (svSvgWidth === null)
-		svSvgWidth = parseInt(d3.select('#chart').style('width'), 10);
-
 	svDataTree = {
-	    'all': {
+	    '': {
 	        'svUnique': 0,
 		'svTotal': Object.keys(sampledata).reduce(
 		    function (p, c) { return (p + sampledata[c].svTotal); }, 0),
@@ -58,14 +58,20 @@ function svInit()
 	};
 	svAnnotateDepth(svDataTree, 0);
 
-	if (svSvgHeight === null)
-		svSvgHeight = 20 * svMaxDepth;
+	if (svSvgWidth === null)
+		svSvgWidth = parseInt(d3.select('#chart').style('width'), 10);
 
-	svXScale = d3.scale.linear().range([0, svSvgWidth]);
-	svYScale = d3.scale.linear().range([0, svSvgHeight]);
+	if (svSvgHeight === null)
+		svSvgHeight = 25 * svMaxDepth;
+
+	svChartWidth = svSvgWidth - svAxisLabelWidth;
+	svChartHeight = svSvgHeight - svAxisLabelWidth;
+
+	svXScale = d3.scale.linear().range([0, svChartWidth]);
+	svYScale = d3.scale.linear().range([0, svChartHeight]);
 
 	svInfo = d3.select('#info').append('div').attr('class', 'svTooltip');
-	svSvg = d3.select('#chart').append('svg:svg')
+	svSvg = d3.select('#chart').insert('svg:svg', ':first-child')
 	    .attr('width', svSvgWidth)
 	    .attr('height', svSvgHeight);
 	svSvg.append('svg:rect')
@@ -105,13 +111,14 @@ function svInit()
 	svTextWidth = function (d) {
 		return (Math.max(0, svRectWidth(d) - svTextPaddingRight));
 	};
-	svX = function (d) { return (svXScale(d.x)); };
+	svX = function (d) { return (svXScale(d.x) + svAxisLabelWidth); };
 
 	if (svGrowDown)
-		svY = function (d) { return (svYScale(d.y)); };
+		svY = function (d) {
+		    return (svYScale(d.y) - svAxisLabelWidth); };
 	else
 		svY = function (d) {
-		    return (svSvgHeight - svYScale(d.y) - svHeight(d)); };
+		    return (svChartHeight - svYScale(d.y) - svHeight(d)); };
 
 	svData = svPartition(d3.entries(svDataTree)[0]);
 	svRects = svSvg.selectAll('rect').data(svData)
@@ -147,6 +154,23 @@ function svInit()
 	    })
 	    .on('click', svClick)
 	    .text(function (d) { return (d.data.key); });
+
+	svSvg.append("text")
+	    .attr('x', -svSvgHeight)
+	    .attr('dx', '8em')
+	    .attr('y', '30px')
+	    .attr('class', 'svYAxisLabel')
+	    .text('Call Stacks')
+	    .attr('transform', 'rotate(-90)' );
+
+	svSvg.append('text')
+	    .attr('id', 'dap')
+	    .attr('x', '30px')
+	    .attr('dx', '8em')
+	    .attr('y', svSvgHeight - 30)
+	    .attr('class', 'svXAxisLabel')
+	    .attr('width', svSvgWidth - 30)
+	    .text('Percentage of Samples')
 }
 
 function svZoomSet(cd)
