@@ -20,6 +20,8 @@ var svMaxDepth = 0;		/* maximum depth of data object */
 var svMaxUnique = 0;		/* maximum unique contribution of any block */
 var svDepthSamples = [];	/* # of samples at each depth */
 
+var sampledata;			/* filled in by wrapper code */
+
 /* DOM nodes */
 var svSvg;			/* actual flame graph SVG object */
 var svInfo;			/* status box */
@@ -153,15 +155,17 @@ function svInit()
 		return ('url("#' + svId(d) + '")');
 	    })
 	    .on('click', svClick)
-	    .text(function (d) { return (d.data.key); });
+	    .text(function (d) { return (d.data.key); })
+	    .on('mouseover', svStatusUpdate)
+	    .on('mouseout', svStatusHide);
 
-	svSvg.append("text")
+	svSvg.append('text')
 	    .attr('x', -svSvgHeight)
 	    .attr('dx', '8em')
 	    .attr('y', '30px')
 	    .attr('class', 'svYAxisLabel')
 	    .text('Call Stacks')
-	    .attr('transform', 'rotate(-90)' );
+	    .attr('transform', 'rotate(-90)');
 
 	svSvg.append('text')
 	    .attr('id', 'dap')
@@ -170,7 +174,7 @@ function svInit()
 	    .attr('y', svSvgHeight - 30)
 	    .attr('class', 'svXAxisLabel')
 	    .attr('width', svSvgWidth - 30)
-	    .text('Percentage of Samples')
+	    .text('Percentage of Samples');
 }
 
 function svZoomSet(cd)
@@ -212,14 +216,21 @@ function svStatusUpdate(d)
 	svInfo.text(d.data.key);
 	var text = svInfo.html();
 	var nsamples = d.data.value.svTotal;
-	var nchildsamples = nsamples - d.data.value.svUnique;
+	var nunique = d.data.value.svUnique;
 	var pctTotal = (100 * nsamples / svDepthSamples[0]).toFixed(1);
+	var leafPctTotal = (100 * nunique / svDepthSamples[0]).
+	    toFixed(1);
 	var left = d3.event.pageX + 'px';
 	var tp = (d3.event.pageY - parseInt(svInfo.style('height'), 10)) +
 	    'px';
 
-	text += '<br />' + pctTotal + '% of all samples<br />' +
-	    '(' + nsamples + ' samples, ' + nchildsamples + ' in children)';
+	text = '<strong>' + text + '</strong><br />';
+	text += '<strong>Top of stack</strong>: ' + leafPctTotal +
+	    '% of all samples ' + '(' + nunique + ' of ' +
+	    svDepthSamples[0] + ' total samples)<br />';
+	text += '<strong>On stack</strong>: ' + pctTotal + '% of all samples ' +
+	    '(' + nsamples + ' of ' + svDepthSamples[0] +
+	    ' total samples)';
 	svInfo.html(text).
 	    style('left', left).
 	    style('top', tp);
@@ -227,7 +238,7 @@ function svStatusUpdate(d)
 	svTooltipTimeout = setTimeout(function () {
 		svTooltipTimeout = null;
 		svInfo.style('opacity', 0.9);
-	}, 200);
+	}, 100);
 }
 
 function svStatusHide(d)
