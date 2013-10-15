@@ -15,6 +15,7 @@ var svTextPaddingLeft = 5;	/* padding-left on rectangle labels */
 var svTextPaddingRight = 10;	/* pading-right on rectangle labels */
 var svTextPaddingTop = '1.2em';	/* padding-top on rectangle labels */
 var svColorMode = 'mono';	/* coloring mode */
+var svDetailMode = 'zoom';	/* detail display mode ("zoom" or "popout") */
 
 var svMaxDepth = 0;		/* maximum depth of data object */
 var svMaxUnique = 0;		/* maximum unique contribution of any block */
@@ -24,7 +25,8 @@ var sampledata;			/* filled in by wrapper code */
 
 /* DOM nodes */
 var svSvg;			/* actual flame graph SVG object */
-var svInfo;			/* status box */
+var svInfo;			/* tooltip box */
+var svPopout;			/* popout detail box */
 
 /* d3 objects */
 var svXScale;			/* x-axis scale */
@@ -73,6 +75,7 @@ function svInit()
 	svYScale = d3.scale.linear().range([0, svChartHeight]);
 
 	svInfo = d3.select('#info').append('div').attr('class', 'svTooltip');
+	svPopout = d3.select('#info').append('div').attr('class', 'svPopout');
 	svSvg = d3.select('#chart').insert('svg:svg', ':first-child')
 	    .attr('width', svSvgWidth)
 	    .attr('height', svSvgHeight);
@@ -125,7 +128,9 @@ function svInit()
 	svData = svPartition(d3.entries(svDataTree)[0]);
 	svRects = svSvg.selectAll('rect').data(svData)
 	    .enter().append('svg:rect')
-	    .attr('class', 'svBox')
+	    .attr('class', function (d) {
+		return (d.data.value.svSynthetic ?  'svBoxSynthetic' : 'svBox');
+	    })
 	    .attr('x', svX)
 	    .attr('y', svY)
 	    .attr('rx', svCornerPixels)
@@ -212,6 +217,9 @@ var svTooltipTimeout;
 
 function svStatusUpdate(d)
 {
+	if (d.data.value.svSynthetic)
+		return;
+
 	/* Escape the key. */
 	svInfo.text(d.data.key);
 	var text = svInfo.html();
@@ -250,7 +258,7 @@ function svStatusHide(d)
 
 function svAnnotateDepth(json, depth)
 {
-	var key;
+	var key, rem;
 
 	if (depth > svMaxDepth)
 		svMaxDepth = depth;
@@ -258,12 +266,21 @@ function svAnnotateDepth(json, depth)
 	if (depth >= svDepthSamples.length)
 		svDepthSamples[depth] = 0;
 
-
 	for (key in json) {
 		if (json[key].svUnique > svMaxUnique)
 			svMaxUnique = json[key].svUnique;
 		svDepthSamples[depth] += json[key].svTotal;
 		svAnnotateDepth(json[key].svChildren, depth + 1);
+
+		rem = json[key].svUnique;
+		if (rem > 0) {
+			json[key].svChildren[''] = {
+			    'svSynthetic': true,
+			    'svUnique': rem,
+			    'svTotal': rem,
+			    'svChildren': {}
+			};
+		}
 	}
 }
 
@@ -287,6 +304,9 @@ function svColorFlame(d)
 
 function svColorMono(d)
 {
+	if (d.data.value.svSynthetic)
+		return ('#ffffff');
+
 	var s = 20, splus = 80;
 	var sratio;
 
@@ -315,12 +335,33 @@ function svColorMono(d)
 
 function svZoomReset()
 {
-	svZoomSet({ 'x': 0, 'dx': 1, 'y': 0 });
+	if (svDetailMode == 'zoom')
+		svZoomSet({ 'x': 0, 'dx': 1, 'y': 0 });
+	else
+		svPopoutClose();
+}
+
+function svPopoutClose()
+{
+	svPopout.html('');
+	svPopout.attr('opacity', 0);
+}
+
+function svPopoutDetail(cd)
+{
+	svPopout.text(cd);
+	svPopout.attr('opacity', 1);
 }
 
 function svClick(cd)
 {
-	svZoomSet(cd);
+	if (cd.data.value.svSynthetic)
+		return;
+
+	if (svDetailMode == 'zoom')
+		svZoomSet(cd);
+	else
+		svPopoutDetail(cd);
 }
 
 /*
