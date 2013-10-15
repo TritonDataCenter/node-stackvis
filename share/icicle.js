@@ -7,7 +7,7 @@ var svSvgWidth = null;		/* image width (null to auto-compute) */
 var svSvgHeight = null;		/* image height (null to auto-compute) */
 var svGrowDown = false;		/* if true, stacks are drawn growing down */
 var svTransitionTime = 3000;	/* time for transition */
-var svCornerPixels = 5;		/* radius of rounded corners */
+var svCornerPixels = 3;		/* radius of rounded corners */
 var svTextPaddingLeft = 5;	/* padding-left on rectangle labels */
 var svTextPaddingRight = 10;	/* pading-right on rectangle labels */
 var svTextPaddingTop = '1.2em';	/* padding-top on rectangle labels */
@@ -68,6 +68,12 @@ function svInit()
 	svSvg = d3.select('#chart').append('svg:svg')
 	    .attr('width', svSvgWidth)
 	    .attr('height', svSvgHeight);
+	svSvg.append('svg:rect')
+	    .attr('class', 'svBackground')
+	    .attr('width', svSvgWidth)
+	    .attr('height', svSvgHeight)
+	    .attr('fill', '#ffffff')
+	    .on('click', svZoomReset);
 	svPartition = d3.layout.partition().children(function (d) {
 		var rv = d3.entries(d.value.svChildren);
 		return (rv);
@@ -91,7 +97,8 @@ function svInit()
 	}
 
 	svId = function (d) {
-		return (d.data.key + '@' + svYScale(d.y) + '@' + svXScale(d.x));
+		return (encodeURIComponent(
+		    d.data.key + '@' + svYScale(d.y) + '@' + svXScale(d.x)));
 	};
 	svHeight = function (d) { return (svYScale(d.dy)); };
 	svRectWidth = function (d) { return (svXScale(d.dx)); };
@@ -109,6 +116,7 @@ function svInit()
 	svData = svPartition(d3.entries(svDataTree)[0]);
 	svRects = svSvg.selectAll('rect').data(svData)
 	    .enter().append('svg:rect')
+	    .attr('class', 'svBox')
 	    .attr('x', svX)
 	    .attr('y', svY)
 	    .attr('rx', svCornerPixels)
@@ -135,7 +143,7 @@ function svInit()
 	    .attr('dx', svTextPaddingLeft)
 	    .attr('dy', svTextPaddingTop)
 	    .attr('clip-path', function (d) {
-		return ('url(#' + svId(d) + ')');
+		return ('url("#' + svId(d) + '")');
 	    })
 	    .on('click', svClick)
 	    .text(function (d) { return (d.data.key); });

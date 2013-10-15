@@ -17,11 +17,11 @@ div#chart {
 	width: auto;
 }
 
-rect {
+rect.svBox {
 	stroke: #fff;
 }
 
-rect:hover {
+rect.svBox:hover {
 	cursor: pointer;
 }
 
