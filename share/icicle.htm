@@ -18,7 +18,7 @@
         {{{d3_v2_js}}}
         /* END contents of d3.v2.js */
 
-        var sampledata = {{{rawdata}}};
+        svRawData = {{{rawdata}}};
 
         /* BEGIN contents of icicle.js */
         {{{icicle_js}}}
@@ -27,8 +27,16 @@
   </head>
   <body>
     <h1>{{title}}</h1>
-    <div id="info">Hover over a block for details.  Click a block to zoom in.
-    <a href="javascript:svZoomReset()">Zoom out</a></div>
-    <div id="chart"></div>
+    <div id="info">
+      Hover over a block for summary information.  Click a block for details.
+      <a href="javascript:svDetailClose()">Reset view</a>
+      <div class="svTooltip" id="svTooltip"></div>
+    </div>
+    <div id="chart">
+      <div style="position: relative">
+      <div class="svPopout" id="svPopout">
+      </div>
+      </div>
+    </div>
   </body>
 </html>
