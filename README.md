@@ -27,14 +27,24 @@ Or, create the flame graph and share it on Joyent's Manta service:
 
 The default mode assumes input from a DTrace invocation like the above, and
 produces a D3-based visualization in a self-contained HTML file.  You can
-explicitly specify input formats "dtrace" (the default), "collapsed", "perf",
-and "stap" and output formats "collapsed", "flamegraph-svg", and
-"flamegraph-d3".  For example, to read "collapsed" output and produce a SVG
-flamegraph, use:
+explicitly specify input formats:
+
+* "dtrace" (the default)
+* "collapsed" (more easily grep'd through)
+* "perf" (from the Linux "perf" tool)
+* "stap" (from SystemTap)
+
+as well as output formats:
+
+* "collapsed" (see above)
+* "flamegraph-svg" (traditional SVG-based flame graph)
+* "flamegraph-d3" (the default)
+
+For example, to read "collapsed" output and produce a SVG flamegraph, use:
 
     # stackvis collapsed flamegraph-svg < collapsed.out > flamegraph.svg
 
-This module also provides "stackcollapse", and "flamegraph", which are
+This module also provides the "stackcollapse" and "flamegraph" tools, which are
 essentially direct ports of the original FlameGraph tools.  You can use them by
 first collecting data as above, then collapse common stacks:
 
@@ -44,8 +54,8 @@ then create a flame graph:
 
     # flamegraph < collapsed.out > graph.svg
 
-This approach is a little more verbose, but lets you filter out certain function
-names by grepping through the collapsed file.
+This approach is a little more verbose, but lets you filter out particular
+function names by grepping through the collapsed file.
 
 
 ## API
