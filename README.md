@@ -1,9 +1,8 @@
 # node-stackvis
 
 Stackvis is a JavaScript library for visualizing call stacks.  For an example
-of the kind of data we're talking about, see:
-
-    http://us-east.manta.joyent.com/dap/public/stackvis/example.htm
+of the kind of data we're talking about, see
+http://us-east.manta.joyent.com/dap/public/stackvis/example.htm.
 
 This approach (and the code for the SVG-based flamegraph) is based heavily on
 Brendan Gregg's [FlameGraph](http://github.com/brendangregg/FlameGraph/) tools.
@@ -13,12 +12,12 @@ Brendan Gregg's [FlameGraph](http://github.com/brendangregg/FlameGraph/) tools.
 
 The typical pattern is to profile some program with DTrace for, say, 30 seconds:
 
-    # dtrace -n 'profile-97{ @[ustack()] = count(); }' -c "sleep 30" > dtrace.out
+    # dtrace -n 'profile-97/pid == $YOURPID/{ @[ustack()] = count(); }' -c "sleep 30" > dtrace.out
 
 If you're tracing something like Node.js that has a ustack helper, you'll want
 to use jstack() instead:
 
-    # dtrace -n 'profile-97{ @[jstack(80, 8192)] = count(); }' -c "sleep 30" > dtrace.out
+    # dtrace -n 'profile-97/pid == $YOURPID/{ @[jstack(80, 8192)] = count(); }' -c "sleep 30" > dtrace.out
 
 Then create a flamegraph file from the profile output, specifying "dtrace" as
 the input format and the kind of flamegraph as the output.  This example uses a
