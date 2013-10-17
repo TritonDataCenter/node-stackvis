@@ -4,7 +4,14 @@
  * cmd/stackvis: convert stacks between different representations
  */
 
+var mod_fs = require('fs');
+var mod_path = require('path');
+var mod_util = require('util');
+
 var mod_bunyan = require('bunyan');
+var mod_getopt = require('posix-getopt');
+var mod_manta = require('manta');
+var mod_uuid = require('node-uuid');
 
 var mod_stackvis = require('../lib/stackvis');
 
@@ -13,20 +20,106 @@ var log = new mod_bunyan({
     'stream': process.stderr
 });
 
-if (process.argv.length != 4) {
+function usage()
+{
 	console.error('usage: stackvis input-format output-format');
+	console.error('or     stackvis share [FILENAME]');
 	process.exit(2);
 }
 
-var reader, writer;
+function main()
+{
+	if (process.argv.length != 3 && process.argv.length != 4)
+		usage();
 
-try {
-	reader = new mod_stackvis.readerLookup(process.argv[2]);
-	writer = new mod_stackvis.writerLookup(process.argv[3]);
-} catch (ex) {
-	console.error(ex.message);
+	if (process.argv[2] == 'share')
+		cmdShare();
+	else
+		cmdTranslate();
 }
 
-mod_stackvis.pipeStacks(log, process.stdin, reader, writer, process.stdout,
-    function () {});
-process.stdin.resume();
+function cmdShare()
+{
+	var filename, stream;
+
+	if (process.argv.length > 3) {
+		filename = process.argv[3];
+		stream = mod_fs.createReadStream(filename);
+		stream.on('open', function () {
+			shareFinish(stream);
+		});
+		stream.on('error', function (err) {
+			console.error('open "%s": %s', filename, err.message);
+			process.exit(1);
+		});
+	} else if (process.stdin.isTTY) {
+		console.error('error: cannot share contents from terminal');
+		process.exit(1);
+	} else {
+		shareFinish(process.stdin);
+	}
+}
+
+function shareFinish(stream)
+{
+	var client, objname, dirname;
+
+	if (!process.env['MANTA_USER'] ||
+	    !process.env['MANTA_URL'] ||
+	    !process.env['MANTA_KEY_ID']) {
+		console.error('MANTA_USER, MANTA_URL, and MANTA_KEY_ID ' +
+		    'must be set in the environment.');
+		console.error('For details, see ' +
+		    'http://apidocs.joyent.com/manta/#getting-started');
+		process.exit(2);
+	}
+
+	stream.pause();
+	objname = mod_util.format('/%s/public/stackvis/%s/index.htm',
+	    process.env['MANTA_USER'], mod_uuid.v4());
+	dirname = mod_path.dirname(objname);
+	client = mod_manta.createBinClient({ 'log': log });
+	/* Not really that gentlemanly... */
+	process.removeAllListeners('uncaughtException');
+
+	client.mkdirp(dirname, function (err) {
+		if (err) {
+			console.error('mkdirp: %s %s', err.name, err.message);
+			process.exit(1);
+		}
+
+		client.put(objname, stream, function (err2) {
+			if (err2) {
+				console.error('put: %s %s',
+				    err.name, err.message);
+				process.exit(1);
+			}
+
+			console.log('%s%s', process.env['MANTA_URL'], objname);
+			client.close();
+		});
+	});
+	
+}
+
+function cmdTranslate()
+{
+	var reader, writer;
+
+	if (process.argv.length != 4)
+		usage();
+
+	try {
+		reader = new mod_stackvis.readerLookup(process.argv[2]);
+		writer = new mod_stackvis.writerLookup(process.argv[3]);
+	} catch (ex) {
+		console.error(ex.message);
+		usage();
+	}
+
+	mod_stackvis.pipeStacks(log, process.stdin, reader, writer,
+	    process.stdout, function () {});
+	process.stdin.resume();
+}
+
+main();

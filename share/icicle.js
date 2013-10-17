@@ -22,6 +22,38 @@ var svRawData;			/* raw data, filled in by wrapper code */
 var svTooltipBox;		/* tooltip box (D3 selection) */
 var svPopoutBox;		/* popout detail box (D3 selection) */
 var svFlameGraph;		/* main flame graph object */
+var svContext = {
+	'detailClose': svDetailClose,
+	'detailOpen': svDetailOpen,
+	'mouseout': function () {
+		svTooltipBox.text('').style('opacity', null);
+	},
+	'mouseover': function (d, det) {
+		var text, left, top;
+
+		/* escape the key */
+		svTooltipBox.text(det['label']);
+		text = svTooltipBox.html();
+
+		text = '<strong>' + text + '</strong><br />';
+		text += '<strong>Top of stack</strong>: ' +
+		    det['pctUnique'] + '% of all samples ' +
+		    '(' + det['nunique'] + ' of ' +
+		    det['nallsamples'] + ' total samples)<br />';
+		text += '<strong>On stack</strong>: ' +
+		    det['pctSamples'] + '% of all samples ' +
+		    '(' + det['nsamples'] + ' of ' +
+		    det['nallsamples'] + ' total samples)';
+
+		left = det['x'] + 'px';
+		top = (det['y'] -
+		    parseInt(svTooltipBox.style('height'), 10)) + 'px';
+		svTooltipBox.html(text);
+		svTooltipBox.style('left', left);
+		svTooltipBox.style('top', top);
+		svTooltipBox.style('opacity', 0.9);
+	}
+};
 
 window.onload = svInit;
 
@@ -32,38 +64,7 @@ function svInit()
 
 	svFillData(svRawData);
 	svFlameGraph = new FlameGraph(d3.select('#chart'), svRawData,
-	    svSvgWidth, svSvgHeight, {
-		'detailClose': svDetailClose,
-		'detailOpen': svDetailOpen,
-		'mouseout': function () {
-			svTooltipBox.text('').style('opacity', null);
-		},
-		'mouseover': function (d, det) {
-			var text, left, top;
-
-			/* escape the key */
-			svTooltipBox.text(det['label']);
-			text = svTooltipBox.html();
-
-			text = '<strong>' + text + '</strong><br />';
-			text += '<strong>Top of stack</strong>: ' +
-			    det['pctUnique'] + '% of all samples ' +
-			    '(' + det['nunique'] + ' of ' +
-			    det['nallsamples'] + ' total samples)<br />';
-			text += '<strong>On stack</strong>: ' +
-			    det['pctSamples'] + '% of all samples ' +
-			    '(' + det['nsamples'] + ' of ' +
-			    det['nallsamples'] + ' total samples)';
-
-			left = det['x'] + 'px';
-			top = (det['y'] -
-			    parseInt(svTooltipBox.style('height'), 10)) + 'px';
-			svTooltipBox.html(text);
-			svTooltipBox.style('left', left);
-			svTooltipBox.style('top', top);
-			svTooltipBox.style('opacity', 0.9);
-		}
-	    }, {
+	    svSvgWidth, svSvgHeight, svContext, {
 	        'coloring': svColorMode,
 		'growDown': svGrowDown,
 		'axisLabels': true
@@ -177,7 +178,7 @@ function svDetailOpen(d)
 		svPopoutBox.html('');
 		/* jsl:ignore */
 		new FlameGraph(svPopoutBox, svMakeSubgraphData(d), null, null,
-		    null, {
+		    svContext, {
 			'coloring': svColorMode,
 			'growDown': svGrowDown
 		    });
@@ -410,7 +411,7 @@ FlameGraph.prototype.mouseover = function (d)
 	this.fg_hoverto = setTimeout(function () {
 		fg.fg_hoverto = null;
 		fg.fg_context.mouseover(d, detail);
-	}, 100);
+	}, 500);
 };
 
 FlameGraph.prototype.mouseout = function (d)

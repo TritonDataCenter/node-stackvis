@@ -33,6 +33,7 @@ rect.svBox:hover {
 
 div.svTooltip {
 	opacity: 0;
+	z-index: 2;
 	position: absolute;           
 	height: 3em;                 
 	white-space: nowrap;

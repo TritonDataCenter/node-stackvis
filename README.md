@@ -3,22 +3,43 @@
 Stackvis is a JavaScript library for visualizing call stacks.  For an example
 of the kind of data we're talking about, see:
 
-    http://www.cs.brown.edu/~dap/redis-flamegraph.svg
+    http://us-east.manta.joyent.com/dap/public/stackvis/example.htm
 
-This library is based heavily on Brendan Gregg's
-[FlameGraph](http://github.com/brendangregg/FlameGraph/) tools.
+This approach (and the code for the SVG-based flamegraph) is based heavily on
+Brendan Gregg's [FlameGraph](http://github.com/brendangregg/FlameGraph/) tools.
 
 
 ## Command-line tools
 
-This module provides "stackcollapse", and "flamegraph", which are essentially
-direct ports of the original FlameGraph tools.  You can use them by first
-collecting data:
+The typical pattern is to profile some program with DTrace for, say, 30 seconds:
 
-    # dtrace -o dtrace.out -n 'profile-97{ @[ustack()] = count(); }' \
-                           -n 'tick-30s{ exit(0); }'
+    # dtrace -n 'profile-97{ @[ustack()] = count(); }' -c "sleep 30" > dtrace.out
 
-then collapse common stacks:
+If you're tracing something like Node.js that has a ustack helper, you'll want
+to use jstack() instead:
+
+    # dtrace -n 'profile-97{ @[jstack(80, 8192)] = count(); }' -c "sleep 30" > dtrace.out
+
+Then create a flamegraph file from the profile output, specifying "dtrace" as
+the input format and the kind of flamegraph as the output.  This example uses a
+D3-based visualization, which spits out a completely self-contained HTML file:
+
+    # stackvis dtrace flamegraph-d3 < dtrace.out > flamegraph.htm
+
+If you have a Joyent account, you can use "stackvis share" to upload the file to
+Manta and get a permalink for sharing with other people:
+
+    # stackvis share flamegraph.htm 
+    https://us-east.manta.joyent.com/dap/public/stackvis/298c9ae2-aec8-4993-8bc9-d621dcdbeb71/index.htm
+
+This just puts the object to a unique name in your public Manta directory.  You
+can obviously remove it or rename it as you want.
+
+### Other tools
+
+This module also provides "stackcollapse", and "flamegraph", which are
+essentially direct ports of the original FlameGraph tools.  You can use them by
+first collecting data as above, then collapse common stacks:
 
     # stackcollapse < dtrace.out > collapsed.out
 
@@ -26,7 +47,9 @@ then create a flame graph:
 
     # flamegraph < collapsed.out > graph.svg
 
-See the above link for an example.
+You can share these with "stackvis share" as well.  This approach is a little
+more verbose, but lets you do things like filter out certain function names
+(using grep).
 
 
 ## API
@@ -42,6 +65,7 @@ formats:
   there's one stack per line.
 - output-collapsed.js: writes stacks in above "collapsed" form
 - output-flamegraph-svg.js: writes stacks as a flame graph SVG
+- output-flamegraph-d3.js: writes stacks as a flame graph HTML file using D3
 
 Client code shouldn't load these directly.  Instead, require 'stackvis' and use
 lookupReader and lookupWriter:
@@ -77,5 +101,3 @@ work.
   gradient, and time-based.  Another possibility is to use hue to denote the
   module and saturation to denote the size of a frame relative to others at the
   same level of depth.
-- Experiment with more interactive visualizations, like
-  http://bl.ocks.org/1005873
