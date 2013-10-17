@@ -1,39 +1,38 @@
 # node-stackvis
 
-Stackvis is a JavaScript library for visualizing call stacks.  For an example of
-the kind of data we're talking about, see
+Stackvis is a command line tool and JavaScript library for visualizing call
+stacks.  For an example, see
 http://us-east.manta.joyent.com/dap/public/stackvis/example.htm.  This approach
 (and the code for the SVG-based flamegraph) is based heavily on Brendan Gregg's
 [FlameGraph](http://github.com/brendangregg/FlameGraph/) tools.
 
 
-## Command-line tools
+## Synopsis
 
-The typical pattern is to profile some program with DTrace for, say, 30 seconds:
-
-    # dtrace -n 'profile-97/pid == $YOURPID/{ @[ustack()] = count(); }' -c "sleep 30" > dtrace.out
-
-If you're tracing something like Node.js that has a ustack helper, you'll want
-to use jstack() instead:
+Profile a program for 30 seconds:
 
     # dtrace -n 'profile-97/pid == $YOURPID/{ @[jstack(80, 8192)] = count(); }' -c "sleep 30" > dtrace.out
 
-Then create a flamegraph file from the profile output, specifying "dtrace" as
-the input format and the kind of flamegraph as the output.  This example uses a
-D3-based visualization, which spits out a completely self-contained HTML file:
+then translate the DTrace output into a flame graph:
 
-    # stackvis dtrace flamegraph-d3 < dtrace.out > flamegraph.htm
+    # stackvis < dtrace.out > flamegraph.htm
 
-If you have a Joyent account, you can use "stackvis share" to upload the file to
-Manta and get a permalink for sharing with other people:
+Or, create the flame graph and share it on Joyent's Manta service:
 
-    # stackvis share flamegraph.htm 
+    # stackvis < dtrace.out | stackvis share
     https://us-east.manta.joyent.com/dap/public/stackvis/298c9ae2-aec8-4993-8bc9-d621dcdbeb71/index.htm
 
-This just puts the object to a unique name in your public Manta directory.  You
-can obviously remove it or rename it as you want.
 
-### Other tools
+## Details
+
+The default mode assumes input from a DTrace invocation like the above, and
+produces a D3-based visualization in a self-contained HTML file.  You can
+explicitly specify input formats "dtrace" (the default), "collapsed", "perf",
+and "stap" and output formats "collapsed", "flamegraph-svg", and
+"flamegraph-d3".  For example, to read "collapsed" output and produce a SVG
+flamegraph, use:
+
+    # stackvis collapsed flamegraph-svg < collapsed.out > flamegraph.svg
 
 This module also provides "stackcollapse", and "flamegraph", which are
 essentially direct ports of the original FlameGraph tools.  You can use them by
@@ -45,9 +44,8 @@ then create a flame graph:
 
     # flamegraph < collapsed.out > graph.svg
 
-You can share these with "stackvis share" as well.  This approach is a little
-more verbose, but lets you do things like filter out certain function names
-(using grep).
+This approach is a little more verbose, but lets you filter out certain function
+names by grepping through the collapsed file.
 
 
 ## API

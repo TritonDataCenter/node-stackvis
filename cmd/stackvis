@@ -29,13 +29,14 @@ function usage()
 
 function main()
 {
-	if (process.argv.length != 3 && process.argv.length != 4)
+	if (process.argv.length > 4)
 		usage();
 
-	if (process.argv[2] == 'share')
-		cmdShare();
-	else
+	if (process.argv.length === 2 ||
+	    process.argv[2] != 'share')
 		cmdTranslate();
+	else
+		cmdShare();
 }
 
 function cmdShare()
@@ -105,13 +106,21 @@ function shareFinish(stream)
 function cmdTranslate()
 {
 	var reader, writer;
+	var rname = 'dtrace';
+	var wname = 'flamegraph-d3';
 
-	if (process.argv.length != 4)
-		usage();
+	if (process.argv.length > 2) {
+		if (process.argv[2][0] == '-')
+			usage();
+		rname = process.argv[2];
+	}
+
+	if (process.argv.length > 3)
+		wname = process.argv[3];
 
 	try {
-		reader = new mod_stackvis.readerLookup(process.argv[2]);
-		writer = new mod_stackvis.writerLookup(process.argv[3]);
+		reader = new mod_stackvis.readerLookup(rname);
+		writer = new mod_stackvis.writerLookup(wname);
 	} catch (ex) {
 		console.error(ex.message);
 		usage();
