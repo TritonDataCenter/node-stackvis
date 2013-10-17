@@ -1,11 +1,10 @@
 # node-stackvis
 
-Stackvis is a JavaScript library for visualizing call stacks.  For an example
-of the kind of data we're talking about, see
-http://us-east.manta.joyent.com/dap/public/stackvis/example.htm.
-
-This approach (and the code for the SVG-based flamegraph) is based heavily on
-Brendan Gregg's [FlameGraph](http://github.com/brendangregg/FlameGraph/) tools.
+Stackvis is a JavaScript library for visualizing call stacks.  For an example of
+the kind of data we're talking about, see
+http://us-east.manta.joyent.com/dap/public/stackvis/example.htm.  This approach
+(and the code for the SVG-based flamegraph) is based heavily on Brendan Gregg's
+[FlameGraph](http://github.com/brendangregg/FlameGraph/) tools.
 
 
 ## Command-line tools
