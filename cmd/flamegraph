@@ -15,6 +15,16 @@ var log = new mod_bunyan({
 var reader = new mod_stackvis.readerLookup('collapsed');
 var writer = new mod_stackvis.writerLookup('flamegraph-svg');
 
+var args = {};
+
+for (var i = 2; i < process.argv.length; i++) {
+    var arg = process.argv[i];
+    var eq = arg.indexOf('=');
+    if (eq < 0)
+        continue;
+    args[arg.substr(0, eq)] = arg.substr(eq + 1);
+}
+
 mod_stackvis.pipeStacks(log, process.stdin, reader, writer, process.stdout,
-    function () {});
+    args, function () {});
 process.stdin.resume();
