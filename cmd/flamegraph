@@ -5,6 +5,7 @@
  */
 
 var mod_bunyan = require('bunyan');
+var mod_getopt = require('posix-getopt');
 var mod_stackvis = require('../lib/stackvis');
 
 var log = new mod_bunyan({
@@ -15,14 +16,22 @@ var log = new mod_bunyan({
 var reader = new mod_stackvis.readerLookup('collapsed');
 var writer = new mod_stackvis.writerLookup('flamegraph-svg');
 
-var args = {};
+var parser = new mod_getopt.BasicParser('x:', process.argv);
 
-for (var i = 2; i < process.argv.length; i++) {
-    var arg = process.argv[i];
-    var eq = arg.indexOf('=');
-    if (eq < 0)
-        continue;
-    args[arg.substr(0, eq)] = arg.substr(eq + 1);
+var args = {};
+while ((option = parser.getopt()) !== undefined) {
+    switch (option.option) {
+        case 'x':
+            var arg = option.optarg;
+            var eq = arg.indexOf('=');
+            if (eq < 0)
+                break;
+            args[arg.substr(0, eq)] = arg.substr(eq + 1);
+            break;
+        default:
+            process.exit(1);
+            break;
+      }
 }
 
 mod_stackvis.pipeStacks(log, process.stdin, reader, writer, process.stdout,
