@@ -20,6 +20,7 @@ JSSTYLE		 = jsstyle
 # Files
 #
 JS_FILES	:= $(shell find cmd lib -name '*.js' -not -path 'lib/www/*')
+JS_FILES	+= cmd/flamegraph cmd/stackvis cmd/stackcollapse
 
 JSL_CONF_NODE	 = tools/jsl.node.conf
 JSL_CONF_WEB	 = tools/jsl.web.conf
@@ -38,6 +39,6 @@ all:
 
 .PHONY: test
 test:
-	$(CATEST) $(JSTEST_FILES)
+	@echo no tests defined
 
 include ./Makefile.targ

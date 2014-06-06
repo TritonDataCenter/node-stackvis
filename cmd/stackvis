@@ -100,7 +100,6 @@ function shareFinish(stream)
 			client.close();
 		});
 	});
-	
 }
 
 function cmdTranslate()

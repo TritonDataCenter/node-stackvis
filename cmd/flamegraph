@@ -19,19 +19,22 @@ var writer = new mod_stackvis.writerLookup('flamegraph-svg');
 var parser = new mod_getopt.BasicParser('x:', process.argv);
 
 var args = {};
+var option;
 while ((option = parser.getopt()) !== undefined) {
-    switch (option.option) {
-        case 'x':
-            var arg = option.optarg;
-            var eq = arg.indexOf('=');
-            if (eq < 0)
-                break;
-            args[arg.substr(0, eq)] = arg.substr(eq + 1);
-            break;
-        default:
-            process.exit(1);
-            break;
-      }
+	switch (option.option) {
+	case 'x':
+		var arg = option.optarg;
+		var eq = arg.indexOf('=');
+		if (eq < 0) {
+			console.error('warn: ignoring "%s" (no value)', arg);
+			break;
+		}
+		args[arg.substr(0, eq)] = arg.substr(eq + 1);
+		break;
+	default:
+		process.exit(1);
+		break;
+	}
 }
 
 mod_stackvis.pipeStacks(log, process.stdin, reader, writer, process.stdout,
