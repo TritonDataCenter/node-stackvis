@@ -65,11 +65,9 @@ function shareFinish(stream)
 {
 	var client, objname, dirname;
 
-	if (!process.env['MANTA_USER'] ||
-	    !process.env['MANTA_URL'] ||
-	    !process.env['MANTA_KEY_ID']) {
-		console.error('MANTA_USER, MANTA_URL, and MANTA_KEY_ID ' +
-		    'must be set in the environment.');
+	if (!process.env['MANTA_USER'] || !process.env['MANTA_URL']) {
+		console.error('MANTA_USER and MANTA_URL must be set in ' +
+		    'the environment.');
 		console.error('For details, see ' +
 		    'http://apidocs.joyent.com/manta/#getting-started');
 		process.exit(2);
